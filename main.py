@@ -52,14 +52,16 @@ plt.figure(figsize = (13,6))
 sns.countplot( x= df['Race'], hue = 'HeartDisease', data = df, palette = 'YlOrBr')
 plt.xlabel('Race')
 plt.ylabel('Frequency')
-plt.show()
+#plt.show()
+print('Distribution of Cases with Yes/No heart disease according to being a smoker or not.')
 
 plt.figure(figsize = (13,6))
 sns.countplot(x = df['AgeCategory'], hue = 'HeartDisease', data = df, palette = 'YlOrBr')
 fig.suptitle("Distribution of Cases with Yes/No hartdisease according to AgeCategory")
 plt.xlabel('AgeCategory')
 plt.ylabel('Frequency')
-plt.show()
+#plt.show()
+print('Distribution of Cases with Yes/No hartdisease according to AgeCategory')
 
 fig, ax = plt.subplots(figsize = (13,6))
 
@@ -118,7 +120,8 @@ sns.set_palette('YlOrBr')
 plt.figure(figsize = (13,6))
 plt.title('Distribution of correlation of features')
 abs(correlation['HeartDisease']).sort_values()[:-1].plot.barh()
-plt.show()
+#plt.show()
+print('Distribution of correlation of features')
 
 fig, ax = plt.subplots(figsize = (13,5))
 sns.kdeplot(df[df["HeartDisease"]==1]["BMI"], alpha=0.5,shade = True, color="red", label="HeartDisease", ax = ax)
@@ -127,7 +130,8 @@ plt.title('Distribution of Body Mass Index', fontsize = 18)
 ax.set_xlabel("BodyMass")
 ax.set_ylabel("Frequency")
 ax.legend();
-plt.show()
+#plt.show()
+print('Distribution of Body Mass Index')
 
 #### We can see that people who weigh less than 40 kg are more likely to get heart disease!
 
@@ -138,7 +142,8 @@ plt.title('Distribution of SleepTime values', fontsize = 18)
 ax.set_xlabel("SleepTime")
 ax.set_ylabel("Frequency")
 ax.legend();
-plt.show()
+#plt.show()
+print('Distribution of SleepTime values')
 
 fig, ax = plt.subplots(figsize = (13,5))
 sns.kdeplot(df[df["HeartDisease"]==1]["PhysicalHealth"], alpha=0.5,shade = True, color="red", label="HeartDisease", ax = ax)
@@ -147,7 +152,8 @@ plt.title('Distribution of PhysicalHealth state for the last 30 days', fontsize 
 ax.set_xlabel("PhysicalHealth")
 ax.set_ylabel("Frequency")
 ax.legend();
-plt.show()
+#plt.show()
+print('Distribution of PhysicalHealth state for the last 30 days')
 
 fig, ax = plt.subplots(figsize = (13,5))
 sns.kdeplot(df[df["HeartDisease"]==1]["MentalHealth"], alpha=0.5,shade = True, color="red", label="HeartDisease", ax = ax)
@@ -156,7 +162,9 @@ plt.title('Distribution of MenalHealth state for the last 30 days', fontsize = 1
 ax.set_xlabel("MentalHealth")
 ax.set_ylabel("Frequency")
 ax.legend();
-plt.show()
+#plt.show()
+print('Distribution of MenalHealth state for the last 30 days')
+
 
 from sklearn.preprocessing import StandardScaler
 num_cols = ['MentalHealth', 'BMI', 'PhysicalHealth', 'SleepTime']
