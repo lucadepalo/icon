@@ -73,19 +73,18 @@ def evaluate_model(model, x_test, y_test):
     return {'acc': acc, 'prec': prec, 'rec': rec, 'f1': f1, 'kappa': kappa,
             'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm}
 
-
-"""from sklearn.linear_model import LogisticRegressionCV
-lcv = LogisticRegressionCV()
-lcv.fit(X_train, y_train)
-lcv_eval = evaluate_model(lcv, X_test, y_test)
-('logistic regression')
-print('Accuracy:', lcv_eval['acc'])
-print('Precision:', lcv_eval['prec'])
-print('Recall:', lcv_eval['rec'])
-print('F1 Score:', lcv_eval['f1'])
-print('Cohens Kappa Score:', lcv_eval['kappa'])
-print('Area Under Curve:', lcv_eval['auc'])
-print('Confusion Matrix:\n', lcv_eval['cm'])"""
+from sklearn.linear_model import LogisticRegression
+logreg=LogisticRegression()
+logreg.fit(X_train,y_train)
+logreg_eval=evaluate_model(logreg, X_test, y_test)
+print('Logistic Regression')
+print('Accuracy:', logreg_eval['acc'])
+print('Precision:', logreg_eval['prec'])
+print('Recall:', logreg_eval['rec'])
+print('F1 Score:', logreg_eval['f1'])
+print('Cohens Kappa Score:', logreg_eval['kappa'])
+print('Area Under Curve:', logreg_eval['auc'])
+print('Confusion Matrix:\n', logreg_eval['cm'])
 
 """from sklearn.svm import SVR
 svr = SVR()
@@ -137,7 +136,7 @@ fig.set_facecolor('white')
 ## set bar size
 barWidth = 0.2
 clf_score = [clf_eval['acc'], clf_eval['prec'], clf_eval['rec'], clf_eval['f1'], clf_eval['kappa']]
-#lcv_score = [lcv_eval['acc'], lcv_eval['prec'], lcv_eval['rec'], lcv_eval['f1'], lcv_eval['kappa']]
+logreg_score = [logreg_eval['acc'], logreg_eval['prec'], logreg_eval['rec'], logreg_eval['f1'], logreg_eval['kappa']]
 #svr_score = [svr_eval['acc'], svr_eval['prec'], svr_eval['rec'], svr_eval['f1'], svr_eval['kappa']]
 gnb_score = [gnb_eval['acc'], gnb_eval['prec'], gnb_eval['rec'], gnb_eval['f1'], gnb_eval['kappa']]
 
@@ -151,7 +150,7 @@ r2 = [x + barWidth for x in r1]
 
 ## Make the plot
 ax1.bar(r1, clf_score, width=barWidth, edgecolor='white', label='Decision Tree')
-#ax1.bar(r2, lcv_score, width=barWidth, edgecolor='white', label='Logistic Regression (Cross Validated)')
+ax1.bar(r2, logreg_score, width=barWidth, edgecolor='white', label='Logistic Regression')
 #ax1.bar(r2, svr_score, width=barWidth, edgecolor='white', label='Epsilon-support Vector Regression')
 ax1.bar(r2, gnb_score, width=barWidth, edgecolor='white', label='Gaussian Naive Bayes')
 
@@ -170,7 +169,7 @@ ax1.legend()
 # Second plot
 ## Comparing ROC Curve
 ax2.plot(clf_eval['fpr'], clf_eval['tpr'], label='Decision Tree, auc = {:0.5f}'.format(clf_eval['auc']))
-#ax2.plot(lcv_eval['fpr'], lcv_eval['tpr'], label='K-Nearest Nieghbor, auc = {:0.5f}'.format(lcv_eval['auc']))
+ax2.plot(logreg_eval['fpr'], logreg_eval['tpr'], label='K-Nearest Nieghbor, auc = {:0.5f}'.format(logreg_eval['auc']))
 #ax2.plot(svr_eval['fpr'], svr_eval['tpr'], label='Decision Tree, auc = {:0.5f}'.format(svr_eval['auc']))
 ax2.plot(gnb_eval['fpr'], gnb_eval['tpr'], label='Gaussian Bayes, auc = {:0.5f}'.format(gnb_eval['auc']))
 
