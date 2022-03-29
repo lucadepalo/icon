@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import seaborn as sns
-# %matplotlib inline
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
@@ -45,7 +44,6 @@ target = df['HeartDisease']
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(features, target, shuffle = True, test_size = .2, random_state = 44)
 
-
 print('Shape of training feature:', X_train.shape)
 print('Shape of testing feature:', X_test.shape)
 print('Shape of training label:', y_train.shape)
@@ -76,37 +74,46 @@ def evaluate_model(model, x_test, y_test):
             'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm}
 
 
-print('Building a model using KNeighborsClassifier')
-# Building a model using KNeighborsClassifier
+"""from sklearn.linear_model import LogisticRegressionCV
+lcv = LogisticRegressionCV()
+lcv.fit(X_train, y_train)
+lcv_eval = evaluate_model(lcv, X_test, y_test)
+print('Accuracy:', lcv_eval['acc'])
+print('Precision:', lcv_eval['prec'])
+print('Recall:', lcv_eval['rec'])
+print('F1 Score:', lcv_eval['f1'])
+print('Cohens Kappa Score:', lcv_eval['kappa'])
+print('Area Under Curve:', lcv_eval['auc'])
+print('Confusion Matrix:\n', lcv_eval['cm'])"""
 
-from sklearn.neighbors import KNeighborsClassifier
-knn = KNeighborsClassifier(n_neighbors = 5)
+"""from sklearn.svm import SVR
+svr = SVR()
+svr.fit(X_train, y_train)
+svr_eval = evaluate_model(svr, X_test, y_test)
+print('Accuracy:', svr_eval['acc'])
+print('Precision:', svr_eval['prec'])
+print('Recall:', svr_eval['rec'])
+print('F1 Score:', svr_eval['f1'])
+print('Cohens Kappa Score:', svr_eval['kappa'])
+print('Area Under Curve:', svr_eval['auc'])
+print('Confusion Matrix:\n', svr_eval['cm'])"""
 
-knn.fit(X_train, y_train)
-
-
-# Evaluate Model
-knn_eval = evaluate_model(knn, X_test, y_test)
-
-# Print result
-print('Accuracy:', knn_eval['acc'])
-print('Precision:', knn_eval['prec'])
-print('Recall:', knn_eval['rec'])
-print('F1 Score:', knn_eval['f1'])
-print('Cohens Kappa Score:', knn_eval['kappa'])
-print('Area Under Curve:', knn_eval['auc'])
-print('Confusion Matrix:\n', knn_eval['cm'])
+from sklearn.naive_bayes import GaussianNB
+gnb = GaussianNB()
+gnb.fit(X_train, y_train)
+gnb_eval = evaluate_model(gnb, X_test, y_test)
+print('Accuracy:', gnb_eval['acc'])
+print('Precision:', gnb_eval['prec'])
+print('Recall:', gnb_eval['rec'])
+print('F1 Score:', gnb_eval['f1'])
+print('Cohens Kappa Score:', gnb_eval['kappa'])
+print('Area Under Curve:', gnb_eval['auc'])
+print('Confusion Matrix:\n', gnb_eval['cm'])
 
 from sklearn import tree
-
-# Building Decision Tree model
 clf = tree.DecisionTreeClassifier(random_state=0)
 clf.fit(X_train, y_train)
-
-# Evaluate Model
 clf_eval = evaluate_model(clf, X_test, y_test)
-
-# Print result
 print('Accuracy:', clf_eval['acc'])
 print('Precision:', clf_eval['prec'])
 print('Recall:', clf_eval['rec'])
@@ -126,15 +133,23 @@ fig.set_facecolor('white')
 ## set bar size
 barWidth = 0.2
 clf_score = [clf_eval['acc'], clf_eval['prec'], clf_eval['rec'], clf_eval['f1'], clf_eval['kappa']]
-knn_score = [knn_eval['acc'], knn_eval['prec'], knn_eval['rec'], knn_eval['f1'], knn_eval['kappa']]
+#lcv_score = [lcv_eval['acc'], lcv_eval['prec'], lcv_eval['rec'], lcv_eval['f1'], lcv_eval['kappa']]
+#svr_score = [svr_eval['acc'], svr_eval['prec'], svr_eval['rec'], svr_eval['f1'], svr_eval['kappa']]
+gnb_score = [gnb_eval['acc'], gnb_eval['prec'], gnb_eval['rec'], gnb_eval['f1'], gnb_eval['kappa']]
+
 
 ## Set position of bar on X axis
 r1 = np.arange(len(clf_score))
 r2 = [x + barWidth for x in r1]
+#r3 = [x + barWidth for x in r2]
+#r4 = [x + barWidth for x in r3]
+
 
 ## Make the plot
 ax1.bar(r1, clf_score, width=barWidth, edgecolor='white', label='Decision Tree')
-ax1.bar(r2, knn_score, width=barWidth, edgecolor='white', label='K-Nearest Neighbors')
+#ax1.bar(r2, lcv_score, width=barWidth, edgecolor='white', label='Logistic Regression (Cross Validated)')
+#ax1.bar(r2, svr_score, width=barWidth, edgecolor='white', label='Epsilon-support Vector Regression')
+ax1.bar(r2, gnb_score, width=barWidth, edgecolor='white', label='Gaussian Naive Bayes')
 
 ## Configure x and y axis
 ax1.set_xlabel('Metrics', fontweight='bold')
@@ -151,7 +166,10 @@ ax1.legend()
 # Second plot
 ## Comparing ROC Curve
 ax2.plot(clf_eval['fpr'], clf_eval['tpr'], label='Decision Tree, auc = {:0.5f}'.format(clf_eval['auc']))
-ax2.plot(knn_eval['fpr'], knn_eval['tpr'], label='K-Nearest Nieghbor, auc = {:0.5f}'.format(knn_eval['auc']))
+#ax2.plot(lcv_eval['fpr'], lcv_eval['tpr'], label='K-Nearest Nieghbor, auc = {:0.5f}'.format(lcv_eval['auc']))
+#ax2.plot(svr_eval['fpr'], svr_eval['tpr'], label='Decision Tree, auc = {:0.5f}'.format(svr_eval['auc']))
+ax2.plot(gnb_eval['fpr'], gnb_eval['tpr'], label='Gaussian Bayes, auc = {:0.5f}'.format(gnb_eval['auc']))
+
 
 ## Configure x and y axis
 ax2.set_xlabel('False Positive Rate', fontweight='bold')
