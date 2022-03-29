@@ -144,7 +144,7 @@ gnb_score = [gnb_eval['acc'], gnb_eval['prec'], gnb_eval['rec'], gnb_eval['f1'],
 ## Set position of bar on X axis
 r1 = np.arange(len(clf_score))
 r2 = [x + barWidth for x in r1]
-#r3 = [x + barWidth for x in r2]
+r3 = [x + barWidth for x in r2]
 #r4 = [x + barWidth for x in r3]
 
 
@@ -152,7 +152,7 @@ r2 = [x + barWidth for x in r1]
 ax1.bar(r1, clf_score, width=barWidth, edgecolor='white', label='Decision Tree')
 ax1.bar(r2, logreg_score, width=barWidth, edgecolor='white', label='Logistic Regression')
 #ax1.bar(r2, svr_score, width=barWidth, edgecolor='white', label='Epsilon-support Vector Regression')
-ax1.bar(r2, gnb_score, width=barWidth, edgecolor='white', label='Gaussian Naive Bayes')
+ax1.bar(r3, gnb_score, width=barWidth, edgecolor='white', label='Gaussian Naive Bayes')
 
 ## Configure x and y axis
 ax1.set_xlabel('Metrics', fontweight='bold')
