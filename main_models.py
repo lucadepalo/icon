@@ -113,7 +113,7 @@ print('Area Under Curve:', gnb_eval['auc'])
 print('Confusion Matrix:\n', gnb_eval['cm'])
 
 from sklearn import tree
-clf = tree.DecisionTreeClassifier(random_state=0)
+clf = tree.DecisionTreeClassifier()
 clf.fit(X_train, y_train)
 clf_eval = evaluate_model(clf, X_test, y_test)
 print('decision tree classifier')
@@ -124,6 +124,34 @@ print('F1 Score:', clf_eval['f1'])
 print('Cohens Kappa Score:', clf_eval['kappa'])
 print('Area Under Curve:', clf_eval['auc'])
 print('Confusion Matrix:\n', clf_eval['cm'])
+
+from sklearn.ensemble import RandomForestClassifier
+rfc = RandomForestClassifier()
+rfc.fit(X_train, y_train)
+rfc_eval = evaluate_model(clf, X_test, y_test)
+print('Random Forest classifier')
+print('Accuracy:', rfc_eval['acc'])
+print('Precision:', rfc_eval['prec'])
+print('Recall:', rfc_eval['rec'])
+print('F1 Score:', rfc_eval['f1'])
+print('Cohens Kappa Score:', rfc_eval['kappa'])
+print('Area Under Curve:', rfc_eval['auc'])
+print('Confusion Matrix:\n', rfc_eval['cm'])
+
+from sklearn.ensemble import AdaBoostClassifier
+
+abc = AdaBoostClassifier(n_estimators=1000)
+abc.fit(X_train, y_train)
+abc_eval = evaluate_model(clf, X_test, y_test)
+print('Ada Boost classifier')
+print('Accuracy:', abc_eval['acc'])
+print('Precision:', abc_eval['prec'])
+print('Recall:', abc_eval['rec'])
+print('F1 Score:', abc_eval['f1'])
+print('Cohens Kappa Score:', abc_eval['kappa'])
+print('Area Under Curve:', abc_eval['auc'])
+print('Confusion Matrix:\n', abc_eval['cm'])
+
 
 # Intitialize figure with two plots
 fig, (ax1, ax2) = plt.subplots(1, 2)
@@ -137,22 +165,26 @@ fig.set_facecolor('white')
 barWidth = 0.2
 clf_score = [clf_eval['acc'], clf_eval['prec'], clf_eval['rec'], clf_eval['f1'], clf_eval['kappa']]
 logreg_score = [logreg_eval['acc'], logreg_eval['prec'], logreg_eval['rec'], logreg_eval['f1'], logreg_eval['kappa']]
-#svr_score = [svr_eval['acc'], svr_eval['prec'], svr_eval['rec'], svr_eval['f1'], svr_eval['kappa']]
+rfc_score = [rfc_eval['acc'], rfc_eval['prec'], rfc_eval['rec'], rfc_eval['f1'], rfc_eval['kappa']]
 gnb_score = [gnb_eval['acc'], gnb_eval['prec'], gnb_eval['rec'], gnb_eval['f1'], gnb_eval['kappa']]
+abc_score = [abc_eval['acc'], abc_eval['prec'], abc_eval['rec'], abc_eval['f1'], abc_eval['kappa']]
 
 
 ## Set position of bar on X axis
 r1 = np.arange(len(clf_score))
 r2 = [x + barWidth for x in r1]
 r3 = [x + barWidth for x in r2]
-#r4 = [x + barWidth for x in r3]
+r4 = [x + barWidth for x in r3]
+r5 = [x + barWidth for x in r4]
+
 
 
 ## Make the plot
 ax1.bar(r1, clf_score, width=barWidth, edgecolor='white', label='Decision Tree')
 ax1.bar(r2, logreg_score, width=barWidth, edgecolor='white', label='Logistic Regression')
-#ax1.bar(r2, svr_score, width=barWidth, edgecolor='white', label='Epsilon-support Vector Regression')
 ax1.bar(r3, gnb_score, width=barWidth, edgecolor='white', label='Gaussian Naive Bayes')
+ax1.bar(r4, rfc_score, width=barWidth, edgecolor='white', label='Random Forest')
+ax1.bar(r5, rfc_score, width=barWidth, edgecolor='white', label='Ada Boost')
 
 ## Configure x and y axis
 ax1.set_xlabel('Metrics', fontweight='bold')
@@ -169,9 +201,10 @@ ax1.legend()
 # Second plot
 ## Comparing ROC Curve
 ax2.plot(clf_eval['fpr'], clf_eval['tpr'], label='Decision Tree, auc = {:0.5f}'.format(clf_eval['auc']))
-ax2.plot(logreg_eval['fpr'], logreg_eval['tpr'], label='K-Nearest Nieghbor, auc = {:0.5f}'.format(logreg_eval['auc']))
-#ax2.plot(svr_eval['fpr'], svr_eval['tpr'], label='Decision Tree, auc = {:0.5f}'.format(svr_eval['auc']))
+ax2.plot(logreg_eval['fpr'], logreg_eval['tpr'], label='Logistic Regression, auc = {:0.5f}'.format(logreg_eval['auc']))
 ax2.plot(gnb_eval['fpr'], gnb_eval['tpr'], label='Gaussian Bayes, auc = {:0.5f}'.format(gnb_eval['auc']))
+ax2.plot(rfc_eval['fpr'], rfc_eval['tpr'], label='Random Forest, auc = {:0.5f}'.format(rfc_eval['auc']))
+ax2.plot(abc_eval['fpr'], abc_eval['tpr'], label='Ada Boost, auc = {:0.5f}'.format(abc_eval['auc']))
 
 
 ## Configure x and y axis
