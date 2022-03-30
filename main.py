@@ -12,21 +12,31 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn import metrics
 
 df = pd.read_csv('data/heart_2020_cleaned.csv')
-df.head()
 
-df.describe().T.style.set_properties(**{'background-color': 'grey','color': 'white','border-color': 'white'})
+print(df.head())
+# https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html
+# This function returns the first n rows for the object based on position.
+# parameter: n int, default 5. Number of rows to select.
+
+# df.describe().T.style.set_properties(**{'background-color': 'grey', 'color': 'white', 'border-color': 'white'})
+# https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html
 
 df.info()
+# https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html
 
-df.nunique()
+print(df.nunique())
+# https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nunique.html
 
-df = df[df.columns].replace({'Yes':1, 'No':0, 'Male':1,'Female':0,'No, borderline diabetes':'0','Yes (during pregnancy)':'1' })
+df = df[df.columns].replace(
+    {'Yes': 1, 'No': 0, 'Male': 1, 'Female': 0, 'No, borderline diabetes': '0', 'Yes (during pregnancy)': '1'})
 df['Diabetic'] = df['Diabetic'].astype(int)
 
-fig, ax = plt.subplots(figsize = (13,6))
 
-ax.hist(df[df["HeartDisease"]==1]["Sex"], bins=15, alpha=0.5, color="red", label="HeartDisease")
-ax.hist(df[df["HeartDisease"]==0]["Sex"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
+
+fig, ax = plt.subplots(figsize=(13, 6))
+
+ax.hist(df[df["HeartDisease"] == 1]["Sex"], bins=15, alpha=0.5, color="red", label="HeartDisease")
+ax.hist(df[df["HeartDisease"] == 0]["Sex"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
 
 ax.set_xlabel("Sex")
 ax.set_ylabel("Frequency")
@@ -35,11 +45,11 @@ fig.suptitle("Distribution of Cases with Yes/No heart disease according to Sex")
 
 ax.legend()
 
-fig, ax = plt.subplots(figsize = (13,6))
+fig, ax = plt.subplots(figsize=(13, 6))
 # ax.set_xticks(2)
 # ax.set_xticklabels(["Non fumatore","Fumatore"])
-ax.hist(df[df["HeartDisease"]==1]["Smoking"], bins=2, alpha=0.5, color="red", label="HeartDisease")
-ax.hist(df[df["HeartDisease"]==0]["Smoking"], bins=2, alpha=0.5, color="#fccc79", label="Normal")
+ax.hist(df[df["HeartDisease"] == 1]["Smoking"], bins=2, alpha=0.5, color="red", label="HeartDisease")
+ax.hist(df[df["HeartDisease"] == 0]["Smoking"], bins=2, alpha=0.5, color="#fccc79", label="Normal")
 
 ax.set_xlabel("Smoking")
 ax.set_ylabel("Frequency")
@@ -48,25 +58,25 @@ fig.suptitle("Distribution of Cases with Yes/No heart disease according to being
 
 ax.legend()
 
-plt.figure(figsize = (13,6))
-sns.countplot( x= df['Race'], hue = 'HeartDisease', data = df, palette = 'YlOrBr')
+plt.figure(figsize=(13, 6))
+sns.countplot(x=df['Race'], hue='HeartDisease', data=df, palette='YlOrBr')
 plt.xlabel('Race')
 plt.ylabel('Frequency')
-#plt.show()
+# plt.show()
 print('Distribution of Cases with Yes/No heart disease according to being a smoker or not.')
 
-plt.figure(figsize = (13,6))
-sns.countplot(x = df['AgeCategory'], hue = 'HeartDisease', data = df, palette = 'YlOrBr')
+plt.figure(figsize=(13, 6))
+sns.countplot(x=df['AgeCategory'], hue='HeartDisease', data=df, palette='YlOrBr')
 fig.suptitle("Distribution of Cases with Yes/No hartdisease according to AgeCategory")
 plt.xlabel('AgeCategory')
 plt.ylabel('Frequency')
-#plt.show()
+# plt.show()
 print('Distribution of Cases with Yes/No hartdisease according to AgeCategory')
 
-fig, ax = plt.subplots(figsize = (13,6))
+fig, ax = plt.subplots(figsize=(13, 6))
 
-ax.hist(df[df["HeartDisease"]==1]["KidneyDisease"], bins=15, alpha=0.5, color="red", label="HeartDisease")
-ax.hist(df[df["HeartDisease"]==0]["KidneyDisease"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
+ax.hist(df[df["HeartDisease"] == 1]["KidneyDisease"], bins=15, alpha=0.5, color="red", label="HeartDisease")
+ax.hist(df[df["HeartDisease"] == 0]["KidneyDisease"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
 
 ax.set_xlabel("KidneyDisease")
 ax.set_ylabel("Frequency")
@@ -75,10 +85,10 @@ fig.suptitle("Distribution of Cases with Yes/No heartdisease according to kidney
 
 ax.legend()
 
-fig, ax = plt.subplots(figsize = (13,6))
+fig, ax = plt.subplots(figsize=(13, 6))
 
-ax.hist(df[df["HeartDisease"]==1]["SkinCancer"], bins=15, alpha=0.5, color="red", label="HeartDisease")
-ax.hist(df[df["HeartDisease"]==0]["SkinCancer"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
+ax.hist(df[df["HeartDisease"] == 1]["SkinCancer"], bins=15, alpha=0.5, color="red", label="HeartDisease")
+ax.hist(df[df["HeartDisease"] == 0]["SkinCancer"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
 
 ax.set_xlabel("SkinCancer")
 ax.set_ylabel("Frequency")
@@ -87,10 +97,10 @@ fig.suptitle("Distribution of Cases with Yes/No heartdisease based on previous e
 
 ax.legend()
 
-fig, ax = plt.subplots(figsize = (13,6))
+fig, ax = plt.subplots(figsize=(13, 6))
 
-ax.hist(df[df["HeartDisease"]==1]["Stroke"], bins=15, alpha=0.5, color="red", label="HeartDisease")
-ax.hist(df[df["HeartDisease"]==0]["Stroke"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
+ax.hist(df[df["HeartDisease"] == 1]["Stroke"], bins=15, alpha=0.5, color="red", label="HeartDisease")
+ax.hist(df[df["HeartDisease"] == 0]["Stroke"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
 
 ax.set_xlabel("Stroke")
 ax.set_ylabel("Frequency")
@@ -99,10 +109,10 @@ fig.suptitle("Distribution of Cases with Yes/No hartdisease based on previous ex
 
 ax.legend()
 
-fig, ax = plt.subplots(figsize = (13,6))
+fig, ax = plt.subplots(figsize=(13, 6))
 
-ax.hist(df[df["HeartDisease"]==1]["Diabetic"], bins=15, alpha=0.5, color="red", label="HeartDisease")
-ax.hist(df[df["HeartDisease"]==0]["Diabetic"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
+ax.hist(df[df["HeartDisease"] == 1]["Diabetic"], bins=15, alpha=0.5, color="red", label="HeartDisease")
+ax.hist(df[df["HeartDisease"] == 0]["Diabetic"], bins=15, alpha=0.5, color="#fccc79", label="Normal")
 
 ax.set_xlabel("Diabetic")
 ax.set_ylabel("Frequency")
@@ -112,96 +122,100 @@ fig.suptitle("Distribution of Cases with Yes/No hartdisease based on previous ex
 ax.legend()
 
 correlation = df.corr().round(2)
-plt.figure(figsize = (14,7))
-sns.heatmap(correlation, annot = True, cmap = 'YlOrBr')
+plt.figure(figsize=(14, 7))
+sns.heatmap(correlation, annot=True, cmap='YlOrBr')
 
 sns.set_style('white')
 sns.set_palette('YlOrBr')
-plt.figure(figsize = (13,6))
+plt.figure(figsize=(13, 6))
 plt.title('Distribution of correlation of features')
 abs(correlation['HeartDisease']).sort_values()[:-1].plot.barh()
-#plt.show()
+# plt.show()
 print('Distribution of correlation of features')
 
-fig, ax = plt.subplots(figsize = (13,5))
-sns.kdeplot(df[df["HeartDisease"]==1]["BMI"], alpha=0.5,shade = True, color="red", label="HeartDisease", ax = ax)
-sns.kdeplot(df[df["HeartDisease"]==0]["BMI"], alpha=0.5,shade = True, color="#fccc79", label="Normal", ax = ax)
-plt.title('Distribution of Body Mass Index', fontsize = 18)
+fig, ax = plt.subplots(figsize=(13, 5))
+sns.kdeplot(df[df["HeartDisease"] == 1]["BMI"], alpha=0.5, shade=True, color="red", label="HeartDisease", ax=ax)
+sns.kdeplot(df[df["HeartDisease"] == 0]["BMI"], alpha=0.5, shade=True, color="#fccc79", label="Normal", ax=ax)
+plt.title('Distribution of Body Mass Index', fontsize=18)
 ax.set_xlabel("BodyMass")
 ax.set_ylabel("Frequency")
 ax.legend();
-#plt.show()
+# plt.show()
 print('Distribution of Body Mass Index')
 
 #### We can see that people who weigh less than 40 kg are more likely to get heart disease!
 
-fig, ax = plt.subplots(figsize = (13,5))
-sns.kdeplot(df[df["HeartDisease"]==1]["SleepTime"], alpha=0.5,shade = True, color="red", label="HeartDisease", ax = ax)
-sns.kdeplot(df[df["HeartDisease"]==0]["SleepTime"], alpha=0.5,shade = True, color="#fccc79", label="Normal", ax = ax)
-plt.title('Distribution of SleepTime values', fontsize = 18)
+fig, ax = plt.subplots(figsize=(13, 5))
+sns.kdeplot(df[df["HeartDisease"] == 1]["SleepTime"], alpha=0.5, shade=True, color="red", label="HeartDisease", ax=ax)
+sns.kdeplot(df[df["HeartDisease"] == 0]["SleepTime"], alpha=0.5, shade=True, color="#fccc79", label="Normal", ax=ax)
+plt.title('Distribution of SleepTime values', fontsize=18)
 ax.set_xlabel("SleepTime")
 ax.set_ylabel("Frequency")
 ax.legend();
-#plt.show()
+# plt.show()
 print('Distribution of SleepTime values')
 
-fig, ax = plt.subplots(figsize = (13,5))
-sns.kdeplot(df[df["HeartDisease"]==1]["PhysicalHealth"], alpha=0.5,shade = True, color="red", label="HeartDisease", ax = ax)
-sns.kdeplot(df[df["HeartDisease"]==0]["PhysicalHealth"], alpha=0.5,shade = True, color="#fccc79", label="Normal", ax = ax)
-plt.title('Distribution of PhysicalHealth state for the last 30 days', fontsize = 18) # Read the introduction to know what the scale of numerical features mean
+fig, ax = plt.subplots(figsize=(13, 5))
+sns.kdeplot(df[df["HeartDisease"] == 1]["PhysicalHealth"], alpha=0.5, shade=True, color="red", label="HeartDisease",
+            ax=ax)
+sns.kdeplot(df[df["HeartDisease"] == 0]["PhysicalHealth"], alpha=0.5, shade=True, color="#fccc79", label="Normal",
+            ax=ax)
+plt.title('Distribution of PhysicalHealth state for the last 30 days',
+          fontsize=18)  # Read the introduction to know what the scale of numerical features mean
 ax.set_xlabel("PhysicalHealth")
 ax.set_ylabel("Frequency")
 ax.legend();
-#plt.show()
+# plt.show()
 print('Distribution of PhysicalHealth state for the last 30 days')
 
-fig, ax = plt.subplots(figsize = (13,5))
-sns.kdeplot(df[df["HeartDisease"]==1]["MentalHealth"], alpha=0.5,shade = True, color="red", label="HeartDisease", ax = ax)
-sns.kdeplot(df[df["HeartDisease"]==0]["MentalHealth"], alpha=0.5,shade = True, color="#fccc79", label="Normal", ax = ax)
-plt.title('Distribution of MenalHealth state for the last 30 days', fontsize = 18)
+fig, ax = plt.subplots(figsize=(13, 5))
+sns.kdeplot(df[df["HeartDisease"] == 1]["MentalHealth"], alpha=0.5, shade=True, color="red", label="HeartDisease",
+            ax=ax)
+sns.kdeplot(df[df["HeartDisease"] == 0]["MentalHealth"], alpha=0.5, shade=True, color="#fccc79", label="Normal", ax=ax)
+plt.title('Distribution of MenalHealth state for the last 30 days', fontsize=18)
 ax.set_xlabel("MentalHealth")
 ax.set_ylabel("Frequency")
 ax.legend();
-#plt.show()
+# plt.show()
 print('Distribution of MenalHealth state for the last 30 days')
 
-
 from sklearn.preprocessing import StandardScaler
+
 num_cols = ['MentalHealth', 'BMI', 'PhysicalHealth', 'SleepTime']
 Scaler = StandardScaler()
 df[num_cols] = Scaler.fit_transform(df[num_cols])
 
 from sklearn.preprocessing import OneHotEncoder
+
 enc = OneHotEncoder()
 
 # Encoding categorical features
 categ = df[['AgeCategory', 'Race', 'GenHealth']]
 encoded_categ = pd.DataFrame(enc.fit_transform(categ).toarray())
 
-#Likning the encoed_cateh with the df
-df = pd.concat([df, encoded_categ], axis = 1)
+# Likning the encoed_cateh with the df
+df = pd.concat([df, encoded_categ], axis=1)
 
 # Dropping the categorical features
-df = df.drop(columns = ['AgeCategory', 'Race', 'GenHealth'], axis = 1)
+df = df.drop(columns=['AgeCategory', 'Race', 'GenHealth'], axis=1)
 
-#Select Features
-features = df.drop(columns =['HeartDisease'], axis = 1)
+# Select Features
+features = df.drop(columns=['HeartDisease'], axis=1)
 
-#Select Target
+# Select Target
 target = df['HeartDisease']
 
 # Set Training and Testing Data
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(features, target, shuffle = True, test_size = .2, random_state = 44)
 
+X_train, X_test, y_train, y_test = train_test_split(features, target, shuffle=True, test_size=.2, random_state=44)
 
 print('Shape of training feature:', X_train.shape)
 print('Shape of testing feature:', X_test.shape)
 print('Shape of training label:', y_train.shape)
 print('Shape of training label:', y_test.shape)
-#%% md
-# <b>9<span style='color:#0386f7de'>|</span> Modelling</b>
-#%%
+
+
 def evaluate_model(model, x_test, y_test):
     from sklearn import metrics
 
@@ -216,7 +230,7 @@ def evaluate_model(model, x_test, y_test):
     kappa = metrics.cohen_kappa_score(y_test, y_pred)
 
     # Calculate area under curve (AUC)
-    y_pred_proba = model.predict_proba(x_test)[::,1]
+    y_pred_proba = model.predict_proba(x_test)[::, 1]
     fpr, tpr, _ = metrics.roc_curve(y_test, y_pred_proba)
     auc = metrics.roc_auc_score(y_test, y_pred_proba)
 
@@ -226,12 +240,13 @@ def evaluate_model(model, x_test, y_test):
     return {'acc': acc, 'prec': prec, 'rec': rec, 'f1': f1, 'kappa': kappa,
             'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm}
 
+
 # Building a model using KNeighborsClassifier
 from sklearn.neighbors import KNeighborsClassifier
-knn = KNeighborsClassifier(n_neighbors = 5)
+
+knn = KNeighborsClassifier(n_neighbors=5)
 
 knn.fit(X_train, y_train)
-
 
 # Evaluate Model
 knn_eval = evaluate_model(knn, X_test, y_test)
