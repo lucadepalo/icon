@@ -9,6 +9,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn import metrics
+# import warnings filter
+from warnings import simplefilter
+# ignore all future warnings
+simplefilter(action='ignore', category=FutureWarning)
 
 df = pd.read_csv('data/heart_2020_cleaned.csv')
 df.head()
@@ -74,10 +78,10 @@ def evaluate_model(model, x_test, y_test):
             'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm}
 
 from sklearn.linear_model import LogisticRegression
-logreg=LogisticRegression()
+logreg=LogisticRegression(max_iter=150)
 logreg.fit(X_train,y_train)
 logreg_eval=evaluate_model(logreg, X_test, y_test)
-print('Logistic Regression')
+print('\n Logistic Regression')
 print('Accuracy:', logreg_eval['acc'])
 print('Precision:', logreg_eval['prec'])
 print('Recall:', logreg_eval['rec'])
@@ -86,7 +90,8 @@ print('Cohens Kappa Score:', logreg_eval['kappa'])
 print('Area Under Curve:', logreg_eval['auc'])
 print('Confusion Matrix:\n', logreg_eval['cm'])
 
-"""from sklearn.svm import SVR
+'''
+from sklearn.svm import SVR
 svr = SVR()
 svr.fit(X_train, y_train)
 svr_eval = evaluate_model(svr, X_test, y_test)
@@ -97,13 +102,13 @@ print('Recall:', svr_eval['rec'])
 print('F1 Score:', svr_eval['f1'])
 print('Cohens Kappa Score:', svr_eval['kappa'])
 print('Area Under Curve:', svr_eval['auc'])
-print('Confusion Matrix:\n', svr_eval['cm'])"""
-
+print('Confusion Matrix:\n', svr_eval['cm'])
+'''
 from sklearn.naive_bayes import GaussianNB
 gnb = GaussianNB()
 gnb.fit(X_train, y_train)
 gnb_eval = evaluate_model(gnb, X_test, y_test)
-print('gaussian NB')
+print('\n gaussian NB ')
 print('Accuracy:', gnb_eval['acc'])
 print('Precision:', gnb_eval['prec'])
 print('Recall:', gnb_eval['rec'])
@@ -116,7 +121,7 @@ from sklearn import tree
 clf = tree.DecisionTreeClassifier()
 clf.fit(X_train, y_train)
 clf_eval = evaluate_model(clf, X_test, y_test)
-print('decision tree classifier')
+print('\n decision tree classifier')
 print('Accuracy:', clf_eval['acc'])
 print('Precision:', clf_eval['prec'])
 print('Recall:', clf_eval['rec'])
@@ -125,11 +130,12 @@ print('Cohens Kappa Score:', clf_eval['kappa'])
 print('Area Under Curve:', clf_eval['auc'])
 print('Confusion Matrix:\n', clf_eval['cm'])
 
+
 from sklearn.ensemble import RandomForestClassifier
 rfc = RandomForestClassifier()
 rfc.fit(X_train, y_train)
 rfc_eval = evaluate_model(clf, X_test, y_test)
-print('Random Forest classifier')
+print('\n Random Forest classifier')
 print('Accuracy:', rfc_eval['acc'])
 print('Precision:', rfc_eval['prec'])
 print('Recall:', rfc_eval['rec'])
@@ -138,12 +144,14 @@ print('Cohens Kappa Score:', rfc_eval['kappa'])
 print('Area Under Curve:', rfc_eval['auc'])
 print('Confusion Matrix:\n', rfc_eval['cm'])
 
+
 from sklearn.ensemble import AdaBoostClassifier
 
-abc = AdaBoostClassifier(n_estimators=1000)
+
+abc = AdaBoostClassifier(n_estimators=100)
 abc.fit(X_train, y_train)
 abc_eval = evaluate_model(clf, X_test, y_test)
-print('Ada Boost classifier')
+print('\n Ada Boost classifier')
 print('Accuracy:', abc_eval['acc'])
 print('Precision:', abc_eval['prec'])
 print('Recall:', abc_eval['rec'])
@@ -184,7 +192,7 @@ ax1.bar(r1, clf_score, width=barWidth, edgecolor='white', label='Decision Tree')
 ax1.bar(r2, logreg_score, width=barWidth, edgecolor='white', label='Logistic Regression')
 ax1.bar(r3, gnb_score, width=barWidth, edgecolor='white', label='Gaussian Naive Bayes')
 ax1.bar(r4, rfc_score, width=barWidth, edgecolor='white', label='Random Forest')
-ax1.bar(r5, rfc_score, width=barWidth, edgecolor='white', label='Ada Boost')
+ax1.bar(r5, abc_score, width=barWidth, edgecolor='white', label='Ada Boost')
 
 ## Configure x and y axis
 ax1.set_xlabel('Metrics', fontweight='bold')
