@@ -139,7 +139,7 @@ sns.kdeplot(df[df["HeartDisease"] == 0]["BMI"], alpha=0.5, shade=True, color="#f
 plt.title('Distribution of Body Mass Index', fontsize=18)
 ax.set_xlabel("BodyMass")
 ax.set_ylabel("Frequency")
-ax.legend();
+ax.legend()
 # plt.show()
 print('Distribution of Body Mass Index')
 
@@ -151,7 +151,7 @@ sns.kdeplot(df[df["HeartDisease"] == 0]["SleepTime"], alpha=0.5, shade=True, col
 plt.title('Distribution of SleepTime values', fontsize=18)
 ax.set_xlabel("SleepTime")
 ax.set_ylabel("Frequency")
-ax.legend();
+ax.legend()
 # plt.show()
 print('Distribution of SleepTime values')
 
@@ -164,7 +164,7 @@ plt.title('Distribution of PhysicalHealth state for the last 30 days',
           fontsize=18)  # Read the introduction to know what the scale of numerical features mean
 ax.set_xlabel("PhysicalHealth")
 ax.set_ylabel("Frequency")
-ax.legend();
+ax.legend()
 # plt.show()
 print('Distribution of PhysicalHealth state for the last 30 days')
 
@@ -175,7 +175,7 @@ sns.kdeplot(df[df["HeartDisease"] == 0]["MentalHealth"], alpha=0.5, shade=True, 
 plt.title('Distribution of MenalHealth state for the last 30 days', fontsize=18)
 ax.set_xlabel("MentalHealth")
 ax.set_ylabel("Frequency")
-ax.legend();
+ax.legend()
 # plt.show()
 print('Distribution of MenalHealth state for the last 30 days')
 
