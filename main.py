@@ -180,12 +180,14 @@ ax.legend();
 print('Distribution of MenalHealth state for the last 30 days')
 
 from sklearn.preprocessing import StandardScaler
+# https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
 
 num_cols = ['MentalHealth', 'BMI', 'PhysicalHealth', 'SleepTime']
 Scaler = StandardScaler()
 df[num_cols] = Scaler.fit_transform(df[num_cols])
 
 from sklearn.preprocessing import OneHotEncoder
+# https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
 
 enc = OneHotEncoder()
 
@@ -207,6 +209,7 @@ target = df['HeartDisease']
 
 # Set Training and Testing Data
 from sklearn.model_selection import train_test_split
+# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
 
 X_train, X_test, y_train, y_test = train_test_split(features, target, shuffle=True, test_size=.2, random_state=44)
 
