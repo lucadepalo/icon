@@ -10,6 +10,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn import metrics
+from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 # import warnings filter
 from warnings import simplefilter
@@ -243,10 +245,11 @@ def evaluate_model(model, x_test, y_test):
     auc = metrics.roc_auc_score(y_test, y_pred_proba)
 
     # Display confusion matrix
-    cm = metrics.confusion_matrix(y_test, y_pred)
+    # cm = metrics.confusion_matrix(y_test, y_pred)
+    cm = confusion_matrix(y_test, y_pred) #nuovo
 
     return {'acc': acc, 'prec': prec, 'rec': rec, 'f1': f1, 'kappa': kappa,
-            'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm}
+            'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm, 'y_pred': y_pred }
 
 
 from sklearn.linear_model import LogisticRegression
@@ -286,7 +289,11 @@ print('Recall:', gnb_eval['rec'])
 print('F1 Score:', gnb_eval['f1'])
 print('Cohens Kappa Score:', gnb_eval['kappa'])
 print('Area Under Curve:', gnb_eval['auc'])
-print('Confusion Matrix:\n', gnb_eval['cm'])
+#print('Confusion Matrix:\n', gnb_eval['cm'])
+#plot_confusion_matrix(gnb, X_test, y_test)
+disp = ConfusionMatrixDisplay(confusion_matrix=gnb_eval['cm']) #nuovo
+disp.plot()
+plt.show()
 
 from sklearn.neighbors import KNeighborsClassifier
 knn = KNeighborsClassifier()
