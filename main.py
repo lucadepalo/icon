@@ -262,7 +262,6 @@ print('Cohens Kappa Score:', logreg_eval['kappa'])
 print('Area Under Curve:', logreg_eval['auc'])
 print('Confusion Matrix:\n', logreg_eval['cm'])
 
-
 '''from sklearn.svm import SVR
 svr = SVR()
 svr.fit(X_train, y_train)
@@ -289,19 +288,18 @@ print('Cohens Kappa Score:', gnb_eval['kappa'])
 print('Area Under Curve:', gnb_eval['auc'])
 print('Confusion Matrix:\n', gnb_eval['cm'])
 
-from sklearn.tree import DecisionTreeClassifier
-dtc = DecisionTreeClassifier()
-dtc.fit(X_train, y_train)
-dtc_eval = evaluate_model(dtc, X_test, y_test)
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier()
+knn.fit(X_train, y_train)
+knn_eval = evaluate_model(knn, X_test, y_test)
 print('\n decision tree classifier')
-print('Accuracy:', dtc_eval['acc'])
-print('Precision:', dtc_eval['prec'])
-print('Recall:', dtc_eval['rec'])
-print('F1 Score:', dtc_eval['f1'])
-print('Cohens Kappa Score:', dtc_eval['kappa'])
-print('Area Under Curve:', dtc_eval['auc'])
-print('Confusion Matrix:\n', dtc_eval['cm'])
-
+print('Accuracy:', knn_eval['acc'])
+print('Precision:', knn_eval['prec'])
+print('Recall:', knn_eval['rec'])
+print('F1 Score:', knn_eval['f1'])
+print('Cohens Kappa Score:', knn_eval['kappa'])
+print('Area Under Curve:', knn_eval['auc'])
+print('Confusion Matrix:\n', knn_eval['cm'])
 
 from sklearn.ensemble import RandomForestClassifier
 rfc = RandomForestClassifier()
@@ -339,7 +337,7 @@ fig.set_facecolor('white')
 # First plot
 ## set bar size
 barWidth = 0.2
-dtc_score = [dtc_eval['acc'], dtc_eval['prec'], dtc_eval['rec'], dtc_eval['f1'], dtc_eval['kappa']]
+knn_score = [knn_eval['acc'], knn_eval['prec'], knn_eval['rec'], knn_eval['f1'], knn_eval['kappa']]
 logreg_score = [logreg_eval['acc'], logreg_eval['prec'], logreg_eval['rec'], logreg_eval['f1'], logreg_eval['kappa']]
 rfc_score = [rfc_eval['acc'], rfc_eval['prec'], rfc_eval['rec'], rfc_eval['f1'], rfc_eval['kappa']]
 gnb_score = [gnb_eval['acc'], gnb_eval['prec'], gnb_eval['rec'], gnb_eval['f1'], gnb_eval['kappa']]
@@ -347,7 +345,7 @@ abc_score = [abc_eval['acc'], abc_eval['prec'], abc_eval['rec'], abc_eval['f1'],
 
 
 ## Set position of bar on X axis
-r1 = np.arange(len(dtc_score))
+r1 = np.arange(len(knn_score))
 r2 = [x + barWidth for x in r1]
 r3 = [x + barWidth for x in r2]
 r4 = [x + barWidth for x in r3]
@@ -356,7 +354,7 @@ r5 = [x + barWidth for x in r4]
 
 
 ## Make the plot
-ax1.bar(r1, dtc_score, width=barWidth, edgecolor='white', label='Decision Tree')
+ax1.bar(r1, knn_score, width=barWidth, edgecolor='white', label='K Nearest Neighbors')
 ax1.bar(r2, logreg_score, width=barWidth, edgecolor='white', label='Logistic Regression')
 ax1.bar(r3, gnb_score, width=barWidth, edgecolor='white', label='Gaussian Naive Bayes')
 ax1.bar(r4, rfc_score, width=barWidth, edgecolor='white', label='Random Forest')
@@ -365,7 +363,7 @@ ax1.bar(r5, abc_score, width=barWidth, edgecolor='white', label='Ada Boost')
 ## Configure x and y axis
 ax1.set_xlabel('Metrics', fontweight='bold')
 labels = ['Accuracy', 'Precision', 'Recall', 'F1', 'Kappa']
-ax1.set_xticks([r + (barWidth * 1.5) for r in range(len(dtc_score))], )
+ax1.set_xticks([r + (barWidth * 1.5) for r in range(len(knn_score))], )
 ax1.set_xticklabels(labels)
 ax1.set_ylabel('Score', fontweight='bold')
 ax1.set_ylim(0, 1)
@@ -376,7 +374,7 @@ ax1.legend()
 
 # Second plot
 ## Comparing ROC Curve
-ax2.plot(dtc_eval['fpr'], dtc_eval['tpr'], label='Decision Tree, auc = {:0.5f}'.format(dtc_eval['auc']))
+ax2.plot(knn_eval['fpr'], knn_eval['tpr'], label='Decision Tree, auc = {:0.5f}'.format(knn_eval['auc']))
 ax2.plot(logreg_eval['fpr'], logreg_eval['tpr'], label='Logistic Regression, auc = {:0.5f}'.format(logreg_eval['auc']))
 ax2.plot(gnb_eval['fpr'], gnb_eval['tpr'], label='Gaussian Bayes, auc = {:0.5f}'.format(gnb_eval['auc']))
 ax2.plot(rfc_eval['fpr'], rfc_eval['tpr'], label='Random Forest, auc = {:0.5f}'.format(rfc_eval['auc']))
