@@ -265,24 +265,11 @@ print('Cohens Kappa Score:', logreg_eval['kappa'])
 print('Area Under Curve:', logreg_eval['auc'])
 print('Confusion Matrix:\n', logreg_eval['cm'])
 
-'''from sklearn.svm import SVR
-svr = SVR()
-svr.fit(X_train, y_train)
-svr_eval = evaluate_model(svr, X_test, y_test)
-print('SVR')
-print('Accuracy:', svr_eval['acc'])
-print('Precision:', svr_eval['prec'])
-print('Recall:', svr_eval['rec'])
-print('F1 Score:', svr_eval['f1'])
-print('Cohens Kappa Score:', svr_eval['kappa'])
-print('Area Under Curve:', svr_eval['auc'])
-print('Confusion Matrix:\n', svr_eval['cm'])'''
-
 from sklearn.naive_bayes import GaussianNB
 gnb = GaussianNB()
 gnb.fit(X_train, y_train)
 gnb_eval = evaluate_model(gnb, X_test, y_test)
-print('\n gaussian NB ')
+print('\n Gaussian Naive Bayes ')
 print('Accuracy:', gnb_eval['acc'])
 print('Precision:', gnb_eval['prec'])
 print('Recall:', gnb_eval['rec'])
@@ -299,7 +286,7 @@ from sklearn.neighbors import KNeighborsClassifier
 knn = KNeighborsClassifier()
 knn.fit(X_train, y_train)
 knn_eval = evaluate_model(knn, X_test, y_test)
-print('\n decision tree classifier')
+print('\n K Nearest Neighbors')
 print('Accuracy:', knn_eval['acc'])
 print('Precision:', knn_eval['prec'])
 print('Recall:', knn_eval['rec'])
@@ -381,7 +368,7 @@ ax1.legend()
 
 # Second plot
 ## Comparing ROC Curve
-ax2.plot(knn_eval['fpr'], knn_eval['tpr'], label='Decision Tree, auc = {:0.5f}'.format(knn_eval['auc']))
+ax2.plot(knn_eval['fpr'], knn_eval['tpr'], label='K Nearest Neighbors, auc = {:0.5f}'.format(knn_eval['auc']))
 ax2.plot(logreg_eval['fpr'], logreg_eval['tpr'], label='Logistic Regression, auc = {:0.5f}'.format(logreg_eval['auc']))
 ax2.plot(gnb_eval['fpr'], gnb_eval['tpr'], label='Gaussian Bayes, auc = {:0.5f}'.format(gnb_eval['auc']))
 ax2.plot(rfc_eval['fpr'], rfc_eval['tpr'], label='Random Forest, auc = {:0.5f}'.format(rfc_eval['auc']))
