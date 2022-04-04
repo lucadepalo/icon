@@ -10,6 +10,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn import metrics
 from sklearn.metrics import plot_confusion_matrix
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
 # importa filtro warnings
 from warnings import simplefilter
 
@@ -34,8 +35,7 @@ df.info()
 print(df.nunique())
 
 # sostituisce stringhe con valori di verità
-df = df[df.columns].replace(
-    {'Yes': 1, 'No': 0, 'Male': 1, 'Female': 0, 'No, borderline diabetes': '0', 'Yes (during pregnancy)': '1'})
+df = df[df.columns].replace({'Yes': 1, 'No': 0, 'Male': 1, 'Female': 0, 'No, borderline diabetes': '0', 'Yes (during pregnancy)': '1'})
 df['Diabetic'] = df['Diabetic'].astype(int)
 
 # mostra grafico
@@ -64,7 +64,7 @@ fig.suptitle("Distribuzione di casi positivi e negativi in relazione al tabagism
 ax.legend()
 
 plt.figure(figsize=(13, 6))
-sns.countplot(x=df['Race'], data=df)  # old: (x=df['Race'], hue='HeartDisease', data=df)
+sns.countplot(x=df['Race'], data=df)
 plt.xlabel('Etnia')
 plt.ylabel('Frequenza')
 plt.show()
@@ -159,12 +159,9 @@ plt.show()
 print('Distribuzione delle ore di sonno')
 
 fig, ax = plt.subplots(figsize=(13, 5))
-sns.kdeplot(df[df["HeartDisease"] == 1]["PhysicalHealth"], alpha=0.5, shade=True, color="red", label="Cardiopatia",
-            ax=ax)
-sns.kdeplot(df[df["HeartDisease"] == 0]["PhysicalHealth"], alpha=0.5, shade=True, color="#fccc79", label="Sano",
-            ax=ax)
-plt.title('Distribuzione dello stato di salute fisica nell\'ultimo mese',
-          fontsize=18)  # Read the introduction to know what the scale of numerical features mean
+sns.kdeplot(df[df["HeartDisease"] == 1]["PhysicalHealth"], alpha=0.5, shade=True, color="red", label="Cardiopatia", ax=ax)
+sns.kdeplot(df[df["HeartDisease"] == 0]["PhysicalHealth"], alpha=0.5, shade=True, color="#fccc79", label="Sano", ax=ax)
+plt.title('Distribuzione dello stato di salute fisica nell\'ultimo mese', fontsize=18)
 ax.set_xlabel("Salute fisica")
 ax.set_ylabel("Frequenza")
 ax.legend()
@@ -172,8 +169,7 @@ plt.show()
 print('Distribuzione dello stato di salute fisica nell\'ultimo mese')
 
 fig, ax = plt.subplots(figsize=(13, 5))
-sns.kdeplot(df[df["HeartDisease"] == 1]["MentalHealth"], alpha=0.5, shade=True, color="red", label="Cardiopatia",
-            ax=ax)
+sns.kdeplot(df[df["HeartDisease"] == 1]["MentalHealth"], alpha=0.5, shade=True, color="red", label="Cardiopatia", ax=ax)
 sns.kdeplot(df[df["HeartDisease"] == 0]["MentalHealth"], alpha=0.5, shade=True, color="#fccc79", label="Sano", ax=ax)
 plt.title('Distribuzione dello stato di salute mentale nell\'ultimo mese', fontsize=18)
 ax.set_xlabel("Salute mentale")
@@ -182,40 +178,36 @@ ax.legend()
 plt.show()
 print('Distribuzione dello stato di salute fisica nell\'ultimo mese')
 
-from sklearn.preprocessing import StandardScaler
-
 # https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+from sklearn.preprocessing import StandardScaler
 
 num_cols = ['MentalHealth', 'BMI', 'PhysicalHealth', 'SleepTime']
 Scaler = StandardScaler()
 df[num_cols] = Scaler.fit_transform(df[num_cols])
 
-from sklearn.preprocessing import OneHotEncoder
-
 # https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
-
+from sklearn.preprocessing import OneHotEncoder
 enc = OneHotEncoder()
 
-# Encoding categorical features
+# Codifica delle features categoriche
 categ = df[['AgeCategory', 'Race', 'GenHealth']]
 encoded_categ = pd.DataFrame(enc.fit_transform(categ).toarray())
 
-# Likning the encoed_cateh with the df
+# Collegamento delle feature caregoriche codificate con il data frame
 df = pd.concat([df, encoded_categ], axis=1)
 
-# Dropping the categorical features
+# Pulizia delle colonne
 df = df.drop(columns=['AgeCategory', 'Race', 'GenHealth'], axis=1)
 
-# Select Features
+# Selezione delle features
 features = df.drop(columns=['HeartDisease'], axis=1)
 
-# Select Target
+# Selezione del arget
 target = df['HeartDisease']
 
-# Set Training and Testing Data
-from sklearn.model_selection import train_test_split
-
+# Impostazione dei dati di train e test
 # https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(features, target, shuffle=True, test_size=.2, random_state=44)
 
@@ -223,7 +215,6 @@ print('Dimensioni del training feature:', X_train.shape)
 print('Dimensioni del testing feature:', X_test.shape)
 print('Dimensioni del training label:', y_train.shape)
 print('Dimensioni del training label:', y_test.shape)
-
 
 def evaluate_model(model, x_test, y_test):
     from sklearn import metrics
@@ -247,9 +238,7 @@ def evaluate_model(model, x_test, y_test):
     # cm = metrics.confusion_matrix(y_test, y_pred) vecchio
     cm = confusion_matrix(y_test, y_pred)  # nuovo
 
-    return {'acc': acc, 'prec': prec, 'rec': rec, 'f1': f1, 'kappa': kappa,
-            'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm, 'y_pred': y_pred}
-
+    return {'acc': acc, 'prec': prec, 'rec': rec, 'f1': f1, 'kappa': kappa, 'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm, 'y_pred': y_pred}
 
 from sklearn.linear_model import LogisticRegression
 
