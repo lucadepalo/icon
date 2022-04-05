@@ -18,9 +18,9 @@ from warnings import simplefilter
 simplefilter(action='ignore', category=FutureWarning)
 
 # legge i dati dal csv
+# https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html
 df = pd.read_csv('data/heart_2020_cleaned.csv')
 
-# https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html
 # Questa funzione restituisce le prime n righe dell'oggetto basandosi sulla posizione.
 # parametri: n int, default 5. Numero di righe selezionate.
 print(df.head())
@@ -44,23 +44,17 @@ fig, ax = plt.subplots(figsize=(13, 6))
 # imposta caratteristiche istogrammi
 ax.hist(df[df["HeartDisease"] == 1]["Sex"], bins=15, alpha=0.5, color="red", label="Cardiopatia")
 ax.hist(df[df["HeartDisease"] == 0]["Sex"], bins=15, alpha=0.5, color="#fccc79", label="Sano")
-
 ax.set_xlabel("Sesso")
 ax.set_ylabel("Frequenza")
-
 fig.suptitle("Distribuzione di casi positivi e negativi in relazione al sesso")
-
 ax.legend()
 
 fig, ax = plt.subplots(figsize=(13, 6))
-ax.hist(df[df["HeartDisease"] == 1]["Smoking"], bins=2, alpha=0.5, color="red", label="Cardiopatia")
-ax.hist(df[df["HeartDisease"] == 0]["Smoking"], bins=2, alpha=0.5, color="#fccc79", label="Sano")
-
+ax.hist(df[df["HeartDisease"] == 1]["Smoking"], bins=15, alpha=0.5, color="red", label="Cardiopatia")
+ax.hist(df[df["HeartDisease"] == 0]["Smoking"], bins=15, alpha=0.5, color="#fccc79", label="Sano")
 ax.set_xlabel("Fumatore")
 ax.set_ylabel("Frequenza")
-
 fig.suptitle("Distribuzione di casi positivi e negativi in relazione al tabagismo.")
-
 ax.legend()
 
 plt.figure(figsize=(13, 6))
@@ -79,57 +73,40 @@ plt.show()
 print('Distribuzione di casi positivi e negativi in relazione alla fascia d\'età')
 
 fig, ax = plt.subplots(figsize=(13, 6))
-
 ax.hist(df[df["HeartDisease"] == 1]["KidneyDisease"], bins=15, alpha=0.5, color="red", label="Cardiopatia")
 ax.hist(df[df["HeartDisease"] == 0]["KidneyDisease"], bins=15, alpha=0.5, color="#fccc79", label="Sano")
-
 ax.set_xlabel("Nefropatia")
 ax.set_ylabel("Frequenza")
-
 fig.suptitle("Distribuzione di casi positivi e negativi in relazione alle nefropatie")
-
 ax.legend()
 
 fig, ax = plt.subplots(figsize=(13, 6))
-
 ax.hist(df[df["HeartDisease"] == 1]["SkinCancer"], bins=15, alpha=0.5, color="red", label="Cardiopatia")
 ax.hist(df[df["HeartDisease"] == 0]["SkinCancer"], bins=15, alpha=0.5, color="#fccc79", label="Sano")
-
 ax.set_xlabel("Cancro alla pelle")
 ax.set_ylabel("Frequenza")
-
 fig.suptitle("Distribuzione di casi positivi e negativi in relazione al cancro alla pelle")
-
 ax.legend()
 
 fig, ax = plt.subplots(figsize=(13, 6))
-
 ax.hist(df[df["HeartDisease"] == 1]["Stroke"], bins=15, alpha=0.5, color="red", label="Cardiopatia")
 ax.hist(df[df["HeartDisease"] == 0]["Stroke"], bins=15, alpha=0.5, color="#fccc79", label="Sano")
-
 ax.set_xlabel("Ictus")
 ax.set_ylabel("Frequenza")
-
 fig.suptitle("Distribuzione di casi positivi e negativi in relazione a ictus")
-
 ax.legend()
 
 fig, ax = plt.subplots(figsize=(13, 6))
-
 ax.hist(df[df["HeartDisease"] == 1]["Diabetic"], bins=15, alpha=0.5, color="red", label="Cardiopatia")
 ax.hist(df[df["HeartDisease"] == 0]["Diabetic"], bins=15, alpha=0.5, color="#fccc79", label="Sano")
-
 ax.set_xlabel("Diabetico")
 ax.set_ylabel("Frequenza")
-
 fig.suptitle("Distribuzione di casi positivi e negativi in relazione al diabete")
-
 ax.legend()
 
 correlation = df.corr().round(2)
 plt.figure(figsize=(14, 7))
 sns.heatmap(correlation, annot=True, cmap='YlOrBr')
-
 sns.set_style('white')
 # sns.set_palette('YlOrBr')
 plt.figure(figsize=(13, 6))
@@ -180,7 +157,6 @@ print('Distribuzione dello stato di salute mentale nell\'ultimo mese')
 
 # https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
 from sklearn.preprocessing import StandardScaler
-
 num_cols = ['MentalHealth', 'BMI', 'PhysicalHealth', 'SleepTime']
 Scaler = StandardScaler()
 df[num_cols] = Scaler.fit_transform(df[num_cols])
@@ -208,9 +184,7 @@ target = df['HeartDisease']
 # Impostazione dei dati di train e test
 # https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
 from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(features, target, shuffle=True, test_size=.2, random_state=44)
-
 print('Dimensioni del training feature:', X_train.shape)
 print('Dimensioni del testing feature:', X_test.shape)
 print('Dimensioni del training label:', y_train.shape)
@@ -218,30 +192,25 @@ print('Dimensioni del training label:', y_test.shape)
 
 def evaluate_model(model, x_test, y_test):
     from sklearn import metrics
-
     # Predizione su dati test
     y_pred = model.predict(x_test)
-
     # Calcolo di accuracy, precision, recall, f1-score e kappa score
     acc = metrics.accuracy_score(y_test, y_pred)
     prec = metrics.precision_score(y_test, y_pred)
     rec = metrics.recall_score(y_test, y_pred)
     f1 = metrics.f1_score(y_test, y_pred)
     kappa = metrics.cohen_kappa_score(y_test, y_pred)
-
     # Calcolo area under curve (AUC)
     y_pred_proba = model.predict_proba(x_test)[::, 1]
     fpr, tpr, _ = metrics.roc_curve(y_test, y_pred_proba)
     auc = metrics.roc_auc_score(y_test, y_pred_proba)
-
     # Stampa del grafico confusion matrix
     # cm = metrics.confusion_matrix(y_test, y_pred) vecchio
     cm = confusion_matrix(y_test, y_pred)  # nuovo
-
     return {'acc': acc, 'prec': prec, 'rec': rec, 'f1': f1, 'kappa': kappa, 'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm, 'y_pred': y_pred}
 
+# Importa, imposta e usa la regressione logistica
 from sklearn.linear_model import LogisticRegression
-
 logreg = LogisticRegression(max_iter=150)
 logreg.fit(X_train, y_train)
 logreg_eval = evaluate_model(logreg, X_test, y_test)
@@ -257,8 +226,8 @@ disp.plot()
 disp.ax_.set_title('Regressione Logistica')
 plt.show()
 
+# Importa, imposta e usa il naive Bayes gaussiano
 from sklearn.naive_bayes import GaussianNB
-
 gnb = GaussianNB()
 gnb.fit(X_train, y_train)
 gnb_eval = evaluate_model(gnb, X_test, y_test)
@@ -274,8 +243,8 @@ disp.plot()
 disp.ax_.set_title('Naive Bayes Gaussiano')
 plt.show()
 
+# Importa, imposta e usa il k nearest neighbors
 from sklearn.neighbors import KNeighborsClassifier
-
 knn = KNeighborsClassifier()
 knn.fit(X_train, y_train)
 knn_eval = evaluate_model(knn, X_test, y_test)
@@ -291,8 +260,9 @@ disp.plot()
 disp.ax_.set_title(' K nearest neighbors ')
 plt.show()
 
-from sklearn.ensemble import RandomForestClassifier
 
+# Importa, imposta e usa la random forest
+from sklearn.ensemble import RandomForestClassifier
 rfc = RandomForestClassifier()
 rfc.fit(X_train, y_train)
 rfc_eval = evaluate_model(rfc, X_test, y_test)
@@ -308,8 +278,8 @@ disp.plot()
 disp.ax_.set_title('Classificatore Random Forest')
 plt.show()
 
+# Importa, imposta e usa l'Ada boost
 from sklearn.ensemble import AdaBoostClassifier
-
 abc = AdaBoostClassifier(n_estimators=100)
 abc.fit(X_train, y_train)
 abc_eval = evaluate_model(abc, X_test, y_test)
@@ -381,5 +351,4 @@ ax2.set_ylabel('Tasso di veri positivi', fontweight='bold')
 # Crea legenda e titolo
 ax2.set_title('ROC Curve', fontsize=14, fontweight='bold')
 ax2.legend(loc=4)
-
 plt.show()
