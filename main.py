@@ -50,8 +50,8 @@ fig.suptitle("Distribuzione di casi positivi e negativi in relazione al sesso")
 ax.legend()
 
 fig, ax = plt.subplots(figsize=(13, 6))
-ax.hist(df[df["HeartDisease"] == 1]["Smoking"], bins=2, alpha=0.5, color="red", label="Cardiopatia")
-ax.hist(df[df["HeartDisease"] == 0]["Smoking"], bins=2, alpha=0.5, color="#fccc79", label="Sano")
+ax.hist(df[df["HeartDisease"] == 1]["Smoking"], bins=15, alpha=0.5, color="red", label="Cardiopatia")
+ax.hist(df[df["HeartDisease"] == 0]["Smoking"], bins=15, alpha=0.5, color="#fccc79", label="Sano")
 ax.set_xlabel("Fumatore")
 ax.set_ylabel("Frequenza")
 fig.suptitle("Distribuzione di casi positivi e negativi in relazione al tabagismo.")
@@ -226,7 +226,7 @@ disp.plot()
 plt.show()
 
 # Importa, imposta e usa il naive Bayes gaussiano
-# from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import GaussianNB
 gnb = GaussianNB()
 gnb.fit(X_train, y_train)
 gnb_eval = evaluate_model(gnb, X_test, y_test)
