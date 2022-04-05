@@ -176,7 +176,7 @@ ax.set_xlabel("Salute mentale")
 ax.set_ylabel("Frequenza")
 ax.legend()
 plt.show()
-print('Distribuzione dello stato di salute fisica nell\'ultimo mese')
+print('Distribuzione dello stato di salute mentale nell\'ultimo mese')
 
 # https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
 from sklearn.preprocessing import StandardScaler
@@ -252,8 +252,9 @@ print('Recall:', logreg_eval['rec'])
 print('F1 Score:', logreg_eval['f1'])
 print('Cohens Kappa Score:', logreg_eval['kappa'])
 print('Area Under Curve:', logreg_eval['auc'])
-disp = ConfusionMatrixDisplay(confusion_matrix=logreg_eval['cm'])  # nuovo
+disp = ConfusionMatrixDisplay(confusion_matrix=logreg_eval['cm'])
 disp.plot()
+disp.ax_.set_title('Regressione Logistica')
 plt.show()
 
 from sklearn.naive_bayes import GaussianNB
@@ -270,6 +271,7 @@ print('Cohens Kappa Score:', gnb_eval['kappa'])
 print('Area Under Curve:', gnb_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=gnb_eval['cm'])  # nuovo
 disp.plot()
+disp.ax_.set_title('Naive Bayes Gaussiano')
 plt.show()
 
 from sklearn.neighbors import KNeighborsClassifier
@@ -286,6 +288,7 @@ print('Cohens Kappa Score:', knn_eval['kappa'])
 print('Area Under Curve:', knn_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=knn_eval['cm'])  # nuovo
 disp.plot()
+disp.ax_.set_title(' K nearest neighbors ')
 plt.show()
 
 from sklearn.ensemble import RandomForestClassifier
@@ -302,6 +305,7 @@ print('Cohens Kappa Score:', rfc_eval['kappa'])
 print('Area Under Curve:', rfc_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=rfc_eval['cm'])  # nuovo
 disp.plot()
+disp.ax_.set_title('Classificatore Random Forest')
 plt.show()
 
 from sklearn.ensemble import AdaBoostClassifier
@@ -318,6 +322,7 @@ print('Cohens Kappa Score:', abc_eval['kappa'])
 print('Area Under Curve:', abc_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=abc_eval['cm'])  # nuovo
 disp.plot()
+disp.ax_.set_title('Classificatore AdaBoost')
 plt.show()
 
 # Inizializza l'immagine con due grafici
