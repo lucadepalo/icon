@@ -10,6 +10,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn import metrics
 from sklearn.metrics import plot_confusion_matrix
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.model_selection import cross_val_score
 
 # importa filtro warnings
 from warnings import simplefilter
@@ -21,9 +22,10 @@ simplefilter(action='ignore', category=FutureWarning)
 # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html
 df = pd.read_csv('data/heart_2020_cleaned.csv')
 
+
 # Questa funzione restituisce le prime n righe dell'oggetto basandosi sulla posizione.
 # parametri: n int, default 5. Numero di righe selezionate.
-print(df.head())
+df = df.head(20000)
 
 # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html
 # df.describe().T.style.set_properties(**{'background-color': 'grey', 'color': 'white', 'border-color': 'white'})
@@ -178,13 +180,13 @@ df = df.drop(columns=['AgeCategory', 'Race', 'GenHealth'], axis=1)
 # Selezione delle features
 features = df.drop(columns=['HeartDisease'], axis=1)
 
-# Selezione del arget
+# Selezione del target
 target = df['HeartDisease']
 
 # Impostazione dei dati di train e test
 # https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(features, target, shuffle=True, test_size=.2, random_state=44)
+X_train, X_test, y_train, y_test = train_test_split(features, target, shuffle=True, test_size=.1, random_state=44)
 print('Dimensioni del training feature:', X_train.shape)
 print('Dimensioni del testing feature:', X_test.shape)
 print('Dimensioni del training label:', y_train.shape)
@@ -294,6 +296,12 @@ disp = ConfusionMatrixDisplay(confusion_matrix=abc_eval['cm'])  # nuovo
 disp.plot()
 disp.ax_.set_title('Classificatore AdaBoost')
 plt.show()
+
+print('K-fold CV logreg',cross_val_score(logreg, features, target, cv=5))
+print('K-fold CV gnb',cross_val_score(gnb, features, target, cv=5))
+print('K-fold CV abc',cross_val_score(abc, features, target, cv=5))
+print('K-fold CV rfc',cross_val_score(rfc, features, target, cv=5))
+print('K-fold CV knn',cross_val_score(knn, features, target, cv=5))
 
 # Inizializza l'immagine con due grafici
 fig, (ax1, ax2) = plt.subplots(1, 2)
