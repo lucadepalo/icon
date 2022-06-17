@@ -130,7 +130,7 @@ class Questions(KnowledgeEngine):
         Fact(ipocondria="no"),
     )
     def disease_0(self):
-        self.declare(Fact(disease="cardiopatia"))
+        self.declare(Fact(disease="Cardiopatia"))
 
     @Rule(
         Fact(action="find_disease"),
@@ -157,7 +157,7 @@ class Questions(KnowledgeEngine):
         Fact(ipocondria="molto"),
     )
     def disease_1(self):
-        self.declare(Fact(disease="ansia"))
+        self.declare(Fact(disease="Ansia"))
 
     #when the user's input doesn't match any disease in the knowledge base
     @Rule(Fact(action="find_disease"), Fact(disease=MATCH.disease), salience=-998)
