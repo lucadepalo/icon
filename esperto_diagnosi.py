@@ -54,11 +54,11 @@ def if_not_matched(disease):
     disease_details = get_details(id_disease)
     treatments = get_treatments(id_disease)
     print("")
-    print("The most probable disease that you have is %s\n" % (id_disease))
-    print("A short description of the disease is given below :\n")
+    print("I tuoi sintomi corrispondono a: %s\n" % (id_disease))
+    print("Ecco una breve descrizione della patologia :\n")
     print(disease_details + "\n")
     print(
-        "The common medications and procedures suggested by other real doctors are: \n"
+        "Ecco una breve descrizione delle terapie più comuni: \n"
     )
     print(treatments + "\n")
 
@@ -71,6 +71,6 @@ if __name__ == "__main__":
     while 1:
         engine.reset()
         engine.run()
-        print("Would you like to diagnose some other symptoms?\n Reply yes or no")
+        print("Vuoi ripetere il test?\n Rispondi con si o no")
         if input() == "no":
             exit()

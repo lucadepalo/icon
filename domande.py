@@ -20,83 +20,83 @@ class Questions(KnowledgeEngine):
         yield Fact(action="find_disease")
 
     #taking various input from user
-    @Rule(Fact(action="find_disease"), NOT(Fact(pressione_petto=W())), salience=4)
+    @Rule(Fact(action="find_disease"), NOT(Fact(pressione_petto=W())), salience=21)
     def symptom_0(self):
         self.declare(Fact(pressione_petto=input("Ti capita a volte di avvertire un senso di pressione sul petto? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(sedentarieta=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(sedentarieta=W())), salience=20)
     def symptom_1(self):
         self.declare(Fact(sedentarieta=input("Hai uno stile di vita sedentario? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(fumatore=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(fumatore=W())), salience=19)
     def symptom_2(self):
         self.declare(Fact(fumatore=input("fumi? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(dispnea=W())), salience=3)
+    @Rule(Fact(action="find_disease"), NOT(Fact(dispnea=W())), salience=18)
     def symptom_3(self):
         self.declare(Fact(dispnea=input("Ti capita di avere il fiatone dopo un'attività fisica leggera (ad es. salire le scale)? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(genetica_cardio=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(genetica_cardio=W())), salience=17)
     def symptom_4(self):
         self.declare(Fact(genetica_cardio=input("Hai casi di cardiopatie in famiglia? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(genetica_psico=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(genetica_psico=W())), salience=16)
     def symptom_5(self):
         self.declare(Fact(genetica_psico=input("Hai casi di ansia, depressione o panico in famiglia? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(nausea=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(nausea=W())), salience=15)
     def symptom_6(self):
         self.declare(Fact(nausea=input("Ti capita di avvertire nausea in situazioni di stress? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(stress=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(stress=W())), salience=14)
     def symptom_7(self):
         self.declare(Fact(stress=input("Hai vissuto situazioni stressanti nell'ultimo mese? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(stanchezza=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(stanchezza=W())), salience=13)
     def symptom_8(self):
         self.declare(Fact(stanchezza=input("Avverti spesso stanchezza anche a riposo? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(insonnia=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(insonnia=W())), salience=12)
     def symptom_9(self):
         self.declare(Fact(insonnia=input("Hai avuto difficoltà a dormire nell'ultimo mese? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(gonfiore=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(gonfiore=W())), salience=11)
     def symptom_10(self):
         self.declare(Fact(gonfiore=input("Hai le gambe gonfie a volte? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(palpitazioni=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(palpitazioni=W())), salience=10)
     def symptom_11(self):
         self.declare(Fact(palpitazioni=input("Ti capita di avvertire palpitazioni nel petto? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(sovrappeso=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(sovrappeso=W())), salience=9)
     def symptom_12(self):
         self.declare(Fact(sovrappeso=input("Sei sovrappeso? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(diabete=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(diabete=W())), salience=8)
     def symptom_13(self):
         self.declare(Fact(diabete=input("Soffri di diabete? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(dieta=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(dieta=W())), salience=7)
     def symptom_14(self):
         self.declare(Fact(dieta=input("Hai una dieta poco equilibrata (molti grassi, molti zuccheri, molte carni rosse, pochi vegetali)? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(sudore=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(sudore=W())), salience=6)
     def symptom_15(self):
         self.declare(Fact(sudore=input("Soffri di vampate di calore e/o sudorazione fredda? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(angina=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(angina=W())), salience=5)
     def symptom_16(self):
         self.declare(Fact(angina=input("Avverti a volte dolore alla schiena, al braccio sinistro o che si irraggia sotto il mento? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(ruminazione=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(ruminazione=W())), salience=4)
     def symptom_17(self):
         self.declare(Fact(ruminazione=input("Trovi che sia difficile concentrarti su un'attività a causa dei tuoi pensieri? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(tremori=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(tremori=W())), salience=3)
     def symptom_18(self):
         self.declare(Fact(tremori=input("Ti capita di avere tremori e formicolii? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(negativita=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(negativita=W())), salience=2)
     def symptom_19(self):
         self.declare(Fact(negativita=input("Tendi a vedere il lato negativo delle cose? ")))
 
@@ -225,7 +225,7 @@ class Questions(KnowledgeEngine):
         negativita,
         ipocondria,
     ):
-        print("\nThe bot did not find any diseases that match your exact symptoms.")
+        print("\nI tuoi sintomi combaciano parzialmente con quelli della patologia. Ti invitiamo ad effettuare ulteriori analisi.")
         lis = [
             pressione_petto,
             sedentarieta,
@@ -262,3 +262,4 @@ class Questions(KnowledgeEngine):
                 max_disease = val
         if max_disease != "":
             self.if_not_matched(max_disease)
+
