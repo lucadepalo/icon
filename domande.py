@@ -14,330 +14,150 @@ class Questions(KnowledgeEngine):
         print("")
         print("Questo software aiuta l'utente a capire se soffre di malattie cardiache oppure semplicemente di ansia/ipocondria")
         print("")
-        print("Do you feel any of the following symptoms?")
-        print("Reply high or low or no")
+        print("Ti capita di provare uno o più dei seguenti sintomi?")
+        print("Rispondi molto, poco oppure no")
         print("")
         yield Fact(action="find_disease")
 
     #taking various input from user
-    @Rule(Fact(action="find_disease"), NOT(Fact(headache=W())), salience=4)
+    @Rule(Fact(action="find_disease"), NOT(Fact(pressione_petto=W())), salience=4)
     def symptom_0(self):
-        self.declare(Fact(headache=input("headache: ")))
+        self.declare(Fact(pressione_petto=input("Ti capita a volte di avvertire un senso di pressione sul petto? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(back_pain=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(sedentarieta=W())), salience=1)
     def symptom_1(self):
-        self.declare(Fact(back_pain=input("back pain: ")))
+        self.declare(Fact(sedentarieta=input("Hai uno stile di vita sedentario? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(chest_pain=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(fumatore=W())), salience=1)
     def symptom_2(self):
-        self.declare(Fact(chest_pain=input("chest pain: ")))
+        self.declare(Fact(fumatore=input("fumi? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(cough=W())), salience=3)
+    @Rule(Fact(action="find_disease"), NOT(Fact(dispnea=W())), salience=3)
     def symptom_3(self):
-        self.declare(Fact(cough=input("cough: ")))
+        self.declare(Fact(dispnea=input("Ti capita di avere il fiatone dopo un'attività fisica leggera (ad es. salire le scale)? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(fainting=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(genetica_cardio=W())), salience=1)
     def symptom_4(self):
-        self.declare(Fact(fainting=input("fainting: ")))
+        self.declare(Fact(genetica_cardio=input("Hai casi di cardiopatie in famiglia? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(fatigue=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(genetica_psico=W())), salience=1)
     def symptom_5(self):
-        self.declare(Fact(fatigue=input("fatigue: ")))
-
-    @Rule(Fact(action="find_disease"), NOT(Fact(sunken_eyes=W())), salience=1)
-    def symptom_6(self):
-        self.declare(Fact(sunken_eyes=input("sunken eyes: ")))
-
-    @Rule(Fact(action="find_disease"), NOT(Fact(low_body_temp=W())), salience=1)
-    def symptom_7(self):
-        self.declare(Fact(low_body_temp=input("low body temperature: ")))
-
-    @Rule(Fact(action="find_disease"), NOT(Fact(restlessness=W())), salience=1)
-    def symptom_8(self):
-        self.declare(Fact(restlessness=input("restlessness: ")))
-
-    @Rule(Fact(action="find_disease"), NOT(Fact(sore_throat=W())), salience=1)
-    def symptom_9(self):
-        self.declare(Fact(sore_throat=input("sore throat: ")))
-
-    @Rule(Fact(action="find_disease"), NOT(Fact(fever=W())), salience=1)
-    def symptom_10(self):
-        self.declare(Fact(fever=input("fever: ")))
+        self.declare(Fact(genetica_psico=input("Hai casi di ansia, depressione o panico in famiglia? ")))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(nausea=W())), salience=1)
-    def symptom_11(self):
-        self.declare(Fact(nausea=input("nausea: ")))
+    def symptom_6(self):
+        self.declare(Fact(nausea=input("Ti capita di avvertire nausea in situazioni di stress? ")))
 
-    @Rule(Fact(action="find_disease"), NOT(Fact(blurred_vision=W())), salience=1)
+    @Rule(Fact(action="find_disease"), NOT(Fact(stress=W())), salience=1)
+    def symptom_7(self):
+        self.declare(Fact(stress=input("Hai vissuto situazioni stressanti nell'ultimo mese? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(stanchezza=W())), salience=1)
+    def symptom_8(self):
+        self.declare(Fact(stanchezza=input("Avverti spesso stanchezza anche a riposo? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(insonnia=W())), salience=1)
+    def symptom_9(self):
+        self.declare(Fact(insonnia=input("Hai avuto difficoltà a dormire nell'ultimo mese? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(gonfiore=W())), salience=1)
+    def symptom_10(self):
+        self.declare(Fact(gonfiore=input("Hai le gambe gonfie a volte? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(palpitazioni=W())), salience=1)
+    def symptom_11(self):
+        self.declare(Fact(palpitazioni=input("Ti capita di avvertire palpitazioni nel petto? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(sovrappeso=W())), salience=1)
     def symptom_12(self):
-        self.declare(Fact(blurred_vision=input("blurred_vision: ")))
+        self.declare(Fact(sovrappeso=input("Sei sovrappeso? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(diabete=W())), salience=1)
+    def symptom_13(self):
+        self.declare(Fact(diabete=input("Soffri di diabete? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(dieta=W())), salience=1)
+    def symptom_14(self):
+        self.declare(Fact(dieta=input("Hai una dieta poco equilibrata (molti grassi, molti zuccheri, molte carni rosse, pochi vegetali)? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(sudore=W())), salience=1)
+    def symptom_15(self):
+        self.declare(Fact(sudore=input("Soffri di vampate di calore e/o sudorazione fredda? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(angina=W())), salience=1)
+    def symptom_16(self):
+        self.declare(Fact(angina=input("Avverti a volte dolore alla schiena, al braccio sinistro o che si irraggia sotto il mento? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(ruminazione=W())), salience=1)
+    def symptom_17(self):
+        self.declare(Fact(ruminazione=input("Trovi che sia difficile concentrarti su un'attività a causa dei tuoi pensieri? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(tremori=W())), salience=1)
+    def symptom_18(self):
+        self.declare(Fact(tremori=input("Ti capita di avere tremori e formicolii? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(negativita=W())), salience=1)
+    def symptom_19(self):
+        self.declare(Fact(negativita=input("Tendi a vedere il lato negativo delle cose? ")))
+
+    @Rule(Fact(action="find_disease"), NOT(Fact(ipocondria=W())), salience=1)
+    def symptom_20(self):
+        self.declare(Fact(ipocondria=input("In genere ritieni di essere particolarmente preoccupata/o e impressionabile riguardo alla salute? ")))
 
     #different rules checking for each disease match
     @Rule(
         Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="no"),
-        Fact(cough="no"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="high"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="low"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="high"),
-        Fact(blurred_vision="no"),
+        Fact(pressione_petto="no"),
+        Fact(sedentarieta="molto"),
+        Fact(fumatore="molto"),
+        Fact(dispnea="poco"),
+        Fact(genetica_cardio="molto"),
+        Fact(genetica_psico="no"),
+        Fact(nausea="no"),
+        Fact(stress="no"),
+        Fact(stanchezza="molto"),
+        Fact(insonnia="no"),
+        Fact(gonfiore="molto"),
+        Fact(palpitazioni="poco"),
+        Fact(sovrappeso="poco"),
+        Fact(diabete="molto"),
+        Fact(dieta="molto"),
+        Fact(sudore="no"),
+        Fact(angina="poco"),
+        Fact(ruminazione="no"),
+        Fact(tremori="no"),
+        Fact(negativita="no"),
+        Fact(ipocondria="no"),
     )
     def disease_0(self):
-        self.declare(Fact(disease="Jaundice"))
+        self.declare(Fact(disease="cardiopatia"))
 
     @Rule(
         Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="no"),
-        Fact(cough="no"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="no"),
-        Fact(restlessness="high"),
-        Fact(low_body_temp="no"),
-        Fact(fever="no"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="no"),
-        Fact(blurred_vision="no"),
+        Fact(pressione_petto="molto"),
+        Fact(sedentarieta="no"),
+        Fact(fumatore="no"),
+        Fact(dispnea="no"),
+        Fact(genetica_cardio="no"),
+        Fact(genetica_psico="molto"),
+        Fact(nausea="poco"),
+        Fact(stress="molto"),
+        Fact(stanchezza="no"),
+        Fact(insonnia="molto"),
+        Fact(gonfiore="no"),
+        Fact(palpitazioni="poco"),
+        Fact(sovrappeso="no"),
+        Fact(diabete="no"),
+        Fact(dieta="no"),
+        Fact(sudore="poco"),
+        Fact(angina="no"),
+        Fact(ruminazione="poco"),
+        Fact(tremori="poco"),
+        Fact(negativita="poco"),
+        Fact(ipocondria="molto"),
     )
     def disease_1(self):
-        self.declare(Fact(disease="Alzheimers"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="high"),
-        Fact(chest_pain="no"),
-        Fact(cough="no"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="low"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="no"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="no"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_2(self):
-        self.declare(Fact(disease="Arthritis"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="high"),
-        Fact(cough="low"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="no"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="high"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="no"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_3(self):
-        self.declare(Fact(disease="Tuberculosis"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="high"),
-        Fact(cough="high"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="no"),
-        Fact(restlessness="low"),
-        Fact(low_body_temp="no"),
-        Fact(fever="no"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="no"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_4(self):
-        self.declare(Fact(disease="Asthma"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="low"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="no"),
-        Fact(cough="high"),
-        Fact(fainting="no"),
-        Fact(sore_throat="high"),
-        Fact(fatigue="no"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="low"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="no"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_5(self):
-        self.declare(Fact(disease="Sinusitis"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="no"),
-        Fact(cough="no"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="low"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="no"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="no"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_6(self):
-        self.declare(Fact(disease="Epilepsy"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="high"),
-        Fact(cough="no"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="no"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="no"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="high"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_7(self):
-        self.declare(Fact(disease="Heart Disease"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="no"),
-        Fact(cough="no"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="high"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="no"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="low"),
-        Fact(blurred_vision="low"),
-    )
-    def disease_8(self):
-        self.declare(Fact(disease="Diabetes"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="low"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="no"),
-        Fact(cough="no"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="no"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="no"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="high"),
-        Fact(blurred_vision="low"),
-    )
-    def disease_9(self):
-        self.declare(Fact(disease="Glaucoma"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="no"),
-        Fact(cough="no"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="high"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="no"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="low"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_10(self):
-        self.declare(Fact(disease="Hyperthyroidism"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="high"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="no"),
-        Fact(cough="no"),
-        Fact(fainting="no"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="no"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="high"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="high"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_11(self):
-        self.declare(Fact(disease="Heat Stroke"))
-
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="no"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="no"),
-        Fact(cough="no"),
-        Fact(fainting="yes"),
-        Fact(sore_throat="no"),
-        Fact(fatigue="no"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="high"),
-        Fact(fever="no"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="no"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_12(self):
-        self.declare(Fact(disease="Hypothermia"))
-    
-    @Rule(
-        Fact(action="find_disease"),
-        Fact(headache="high"),
-        Fact(back_pain="no"),
-        Fact(chest_pain="high"),
-        Fact(cough="high"),
-        Fact(fainting="no"),
-        Fact(sore_throat="high"),
-        Fact(fatigue="high"),
-        Fact(restlessness="no"),
-        Fact(low_body_temp="no"),
-        Fact(fever="high"),
-        Fact(sunken_eyes="no"),
-        Fact(nausea="no"),
-        Fact(blurred_vision="no"),
-    )
-    def disease_13(self):
-        self.declare(Fact(disease="Coronavirus"))
+        self.declare(Fact(disease="ansia"))
 
     #when the user's input doesn't match any disease in the knowledge base
     @Rule(Fact(action="find_disease"), Fact(disease=MATCH.disease), salience=-998)
@@ -347,63 +167,87 @@ class Questions(KnowledgeEngine):
         disease_details = self.get_details(id_disease)
         treatments = self.get_treatments(id_disease)
         print("")
-        print("Your symptoms match %s\n" % (id_disease))
-        print("A short description of the disease is given below :\n")
+        print("I tuoi sintomi corrispondono a: %s\n" % (id_disease))
+        print("Ecco una breve descrizione della patologia :\n")
         print(disease_details + "\n")
         print(
-            "The common medications and procedures suggested by other real doctors are: \n"
+            "Ecco una breve descrizione delle terapie più comuni: \n"
         )
         print(treatments + "\n")
 
     @Rule(
         Fact(action="find_disease"),
-        Fact(headache=MATCH.headache),
-        Fact(back_pain=MATCH.back_pain),
-        Fact(chest_pain=MATCH.chest_pain),
-        Fact(cough=MATCH.cough),
-        Fact(fainting=MATCH.fainting),
-        Fact(sore_throat=MATCH.sore_throat),
-        Fact(fatigue=MATCH.fatigue),
-        Fact(low_body_temp=MATCH.low_body_temp),
-        Fact(restlessness=MATCH.restlessness),
-        Fact(fever=MATCH.fever),
-        Fact(sunken_eyes=MATCH.sunken_eyes),
+        Fact(pressione_petto=MATCH.pressione_petto),
+        Fact(sedentarieta=MATCH.sedentarieta),
+        Fact(fumatore=MATCH.fumatore),
+        Fact(dispnea=MATCH.dispnea),
+        Fact(genetica_cardio=MATCH.genetica_cardio),
+        Fact(genetica_psico=MATCH.genetica_psico),
         Fact(nausea=MATCH.nausea),
-        Fact(blurred_vision=MATCH.blurred_vision),
+        Fact(stress=MATCH.stress),
+        Fact(stanchezza=MATCH.stanchezza),
+        Fact(insonnia=MATCH.insonnia),
+        Fact(gonfiore=MATCH.gonfiore),
+        Fact(palpitazioni=MATCH.palpitazioni),
+        Fact(sovrappeso=MATCH.sovrappeso),
+        Fact(diabete=MATCH.diabete),
+        Fact(dieta=MATCH.dieta),
+        Fact(sudore=MATCH.sudore),
+        Fact(angina=MATCH.angina),
+        Fact(ruminazione=MATCH.ruminazione),
+        Fact(tremori=MATCH.tremori),
+        Fact(negativita=MATCH.negativita),
+        Fact(ipocondria=MATCH.ipocondria),
         NOT(Fact(disease=MATCH.disease)),
         salience=-999
     )
     def not_matched(
         self,
-        headache,
-        back_pain,
-        chest_pain,
-        cough,
-        fainting,
-        sore_throat,
-        fatigue,
-        restlessness,
-        low_body_temp,
-        fever,
-        sunken_eyes,
+        pressione_petto,
+        sedentarieta,
+        fumatore,
+        dispnea,
+        genetica_cardio,
+        genetica_psico,
         nausea,
-        blurred_vision,
+        stress,
+        stanchezza,
+        insonnia,
+        gonfiore,
+        palpitazioni,
+        sovrappeso,
+        diabete,
+        dieta,
+        sudore,
+        angina,
+        ruminazione,
+        tremori,
+        negativita,
+        ipocondria,
     ):
         print("\nThe bot did not find any diseases that match your exact symptoms.")
         lis = [
-            headache,
-            back_pain,
-            chest_pain,
-            cough,
-            fainting,
-            sore_throat,
-            fatigue,
-            restlessness,
-            low_body_temp,
-            fever,
-            sunken_eyes,
+            pressione_petto,
+            sedentarieta,
+            fumatore,
+            dispnea,
+            genetica_cardio,
+            genetica_psico,
             nausea,
-            blurred_vision,
+            stress,
+            stanchezza,
+            insonnia,
+            gonfiore,
+            palpitazioni,
+            sovrappeso,
+            diabete,
+            dieta,
+            sudore,
+            angina,
+            ruminazione,
+            tremori,
+            negativita,
+            ipocondria,
         ]
         max_count = 0
         max_disease = ""
@@ -411,7 +255,7 @@ class Questions(KnowledgeEngine):
             count = 0
             temp_list = eval(key)
             for j in range(0, len(lis)):
-                if temp_list[j] == lis[j] and (lis[j] == "high" or lis[j] == "low" or lis[j] == "yes"):
+                if temp_list[j] == lis[j] and (lis[j] == "molto" or lis[j] == "poco" or lis[j] == "si"):
                     count = count + 1
             if count > max_count:
                 max_count = count
