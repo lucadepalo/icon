@@ -80,10 +80,10 @@ def evaluate_model(model, x_test, y_test):
     # Predizione su dati test
     y_pred = model.predict(x_test)
     # Calcolo di accuracy, precision, recall, f1-score e kappa score
-    acc = metrics.accuracy_score(y_test, y_pred)
-    prec = metrics.precision_score(y_test, y_pred)
-    rec = metrics.recall_score(y_test, y_pred)
-    f1 = metrics.f1_score(y_test, y_pred)
+    acc = cross_val_score(model, features, target, cv=5, scoring='accuracy').mean()
+    prec =cross_val_score(model, features, target, cv=5, scoring='precision').mean()
+    rec = cross_val_score(model, features, target, cv=5, scoring='recall').mean()
+    f1 = cross_val_score(model, features, target, cv=5, scoring='f1').mean()
     kappa = metrics.cohen_kappa_score(y_test, y_pred)
     # Calcolo area under curve (AUC)
     y_pred_proba = model.predict_proba(x_test)[::, 1]
@@ -180,11 +180,6 @@ disp.plot()
 disp.ax_.set_title('Classificatore AdaBoost')
 plt.show()
 
-print('K-fold CV logreg',cross_val_score(logreg, features, target, cv=5))
-print('K-fold CV gnb',cross_val_score(gnb, features, target, cv=5))
-print('K-fold CV abc',cross_val_score(abc, features, target, cv=5))
-print('K-fold CV rfc',cross_val_score(rfc, features, target, cv=5))
-print('K-fold CV knn',cross_val_score(knn, features, target, cv=5))
 
 # Inizializza l'immagine con due grafici
 fig, (ax1, ax2) = plt.subplots(1, 2)
