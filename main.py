@@ -23,7 +23,7 @@ simplefilter(action='ignore', category=FutureWarning)
 df = pd.read_csv('data/heart_2020_cleaned.csv')
 
 
-# Questa funzione restituisce le prime n righe dell'oggetto basandosi sulla posizione.
+# Questa funzione serve a indicare quanti esempi selezionare dal dataset a partire dalla prima posizione.
 # parametri: n int, default 5. Numero di righe selezionate.
 df = df.head(20000)
 
