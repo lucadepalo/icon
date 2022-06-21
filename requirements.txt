@@ -5,3 +5,4 @@ matplotlib
 scikit-learn
 jinja2
 experta
+owlready2

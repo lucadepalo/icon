@@ -1,4 +1,5 @@
 from domande import Questions
+from ontologia import Ontology
 diseases_list = []
 diseases_symptoms = []
 symptom_map = {}
@@ -62,6 +63,23 @@ def if_not_matched(disease):
     )
     print(treatments + "\n")
 
+def main_ontology():
+    ont = Ontology()
+    ont.get_symptoms_descriptions()
+    symptoms, keys_symptoms = ont.print_symptoms()
+    while True:
+        print("\nSeleziona il sintomo di cui vuoi conosere la descrizione, inserisci il numero del sintomo")
+        symptom_number = int(input())
+
+        while symptom_number not in symptoms.keys():
+            print("\nAttenzione: numero errato. Seleziona il sintomo di cui vuoi conosere la descrizione, inserisci il numero del sintomo")
+            symptom_number = int(input())
+
+        print("Sintomo: %s, descrizione: %s" % (keys_symptoms[symptom_number], " ".join(symptoms[symptom_number])))
+        print("\nVuoi leggere dettagli su un altro sintomo?\nRispondi con si o no")
+        if input() == "no":
+            exit()
+
 #driver function
 if __name__ == "__main__":
     preprocess()
@@ -73,4 +91,9 @@ if __name__ == "__main__":
         engine.run()
         print("Vuoi ripetere il test?\n Rispondi con si o no")
         if input() == "no":
-            exit()
+            print("Vuoi visualizzare ulteriori informazioni sui sintomi presenti nelle domande appena lette?\n Rispondi con si o no")
+            if input() == "si":
+                                                                                                                                                                                                                                                                 main_ontology()
+            else:
+                exit()
+
