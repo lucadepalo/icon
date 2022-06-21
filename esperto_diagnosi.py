@@ -26,7 +26,7 @@ def preprocess():
         d_desc_map[disease] = disease_s_data
         disease_s_file.close()
 
-        disease_s_file = open("data/" + disease + "_cura.txt")
+        disease_s_file = open("data/" + disease + "_suggerimenti.txt")
         disease_s_data = disease_s_file.read()
         d_treatment_map[disease] = disease_s_data
         disease_s_file.close()
