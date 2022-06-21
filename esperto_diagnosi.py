@@ -58,7 +58,7 @@ def if_not_matched(disease):
     print("Ecco una breve descrizione della patologia :\n")
     print(disease_details + "\n")
     print(
-        "Ecco una breve descrizione delle terapie più comuni: \n"
+        "Ecco cosa fare quando si sospetta di avere questa patologia: \n"
     )
     print(treatments + "\n")
 

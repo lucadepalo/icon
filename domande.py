@@ -15,7 +15,7 @@ class Questions(KnowledgeEngine):
         print("Questo software aiuta l'utente a capire se soffre di malattie cardiache oppure semplicemente di ansia/ipocondria")
         print("")
         print("Ti capita di provare uno o più dei seguenti sintomi?")
-        print("Rispondi molto, poco oppure no")
+        print("Rispondi si oppure no")
         print("")
         yield Fact(action="find_disease")
 
@@ -108,22 +108,22 @@ class Questions(KnowledgeEngine):
     @Rule(
         Fact(action="find_disease"),
         Fact(pressione_petto="no"),
-        Fact(sedentarieta="molto"),
-        Fact(fumatore="molto"),
-        Fact(dispnea="poco"),
-        Fact(genetica_cardio="molto"),
+        Fact(sedentarieta="si"),
+        Fact(fumatore="si"),
+        Fact(dispnea="si"),
+        Fact(genetica_cardio="si"),
         Fact(genetica_psico="no"),
         Fact(nausea="no"),
         Fact(stress="no"),
-        Fact(stanchezza="molto"),
+        Fact(stanchezza="si"),
         Fact(insonnia="no"),
-        Fact(gonfiore="molto"),
-        Fact(palpitazioni="poco"),
-        Fact(sovrappeso="poco"),
-        Fact(diabete="molto"),
-        Fact(dieta="molto"),
+        Fact(gonfiore="si"),
+        Fact(palpitazioni="si"),
+        Fact(sovrappeso="si"),
+        Fact(diabete="si"),
+        Fact(dieta="si"),
         Fact(sudore="no"),
-        Fact(angina="poco"),
+        Fact(angina="si"),
         Fact(ruminazione="no"),
         Fact(tremori="no"),
         Fact(negativita="no"),
@@ -134,27 +134,27 @@ class Questions(KnowledgeEngine):
 
     @Rule(
         Fact(action="find_disease"),
-        Fact(pressione_petto="molto"),
+        Fact(pressione_petto="si"),
         Fact(sedentarieta="no"),
         Fact(fumatore="no"),
         Fact(dispnea="no"),
         Fact(genetica_cardio="no"),
-        Fact(genetica_psico="molto"),
-        Fact(nausea="poco"),
-        Fact(stress="molto"),
+        Fact(genetica_psico="si"),
+        Fact(nausea="si"),
+        Fact(stress="si"),
         Fact(stanchezza="no"),
-        Fact(insonnia="molto"),
+        Fact(insonnia="si"),
         Fact(gonfiore="no"),
-        Fact(palpitazioni="poco"),
+        Fact(palpitazioni="si"),
         Fact(sovrappeso="no"),
         Fact(diabete="no"),
         Fact(dieta="no"),
-        Fact(sudore="poco"),
+        Fact(sudore="si"),
         Fact(angina="no"),
-        Fact(ruminazione="poco"),
-        Fact(tremori="poco"),
-        Fact(negativita="poco"),
-        Fact(ipocondria="molto"),
+        Fact(ruminazione="si"),
+        Fact(tremori="si"),
+        Fact(negativita="si"),
+        Fact(ipocondria="si"),
     )
     def disease_1(self):
         self.declare(Fact(disease="Ansia"))
@@ -171,7 +171,7 @@ class Questions(KnowledgeEngine):
         print("Ecco una breve descrizione della patologia :\n")
         print(disease_details + "\n")
         print(
-            "Ecco una breve descrizione delle terapie più comuni: \n"
+            "Ecco cosa fare quando si sospetta di avere questa patologia: \n"
         )
         print(treatments + "\n")
 
@@ -255,7 +255,7 @@ class Questions(KnowledgeEngine):
             count = 0
             temp_list = eval(key)
             for j in range(0, len(lis)):
-                if temp_list[j] == lis[j] and (lis[j] == "molto" or lis[j] == "poco" or lis[j] == "si"):
+                if temp_list[j] == lis[j] and (lis[j] == "si" or lis[j] == "no"):
                     count = count + 1
             if count > max_count:
                 max_count = count
