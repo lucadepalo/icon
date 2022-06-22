@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#"
+     xml:base="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#descrizione_sintomo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#descrizione_sintomo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#pressione_petto -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#pressione_petto">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sedentarieta -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sedentarieta">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#fumatore -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#fumatore">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#dispnea -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#dispnea">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#nausea -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#nausea">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#stress -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#stress">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#stanchezza -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#stanchezza">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#insonnia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#insonnia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sintomo_cardiopatia"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_alimenti_zuccherati -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_sedentarieta">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#sedentarieta"/>
+        <descrizione_sintomo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Uno stile di vita sedentario promuove l'insorgenza di malattie cardiovascolari e di tutta una serie di disturbi dovuti all'impigrimento dei tessuti corporei.</descrizione_sintomo>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_pressione_petto -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_pressione_petto">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#pressione_petto"/>
+        <descrizione_sintomo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La sensazione di pressione sul petto è spesso descritta come un senso di peso o talvolta di indolenzimento e riporta subito alla mente un infarto; in realtà si tratta di un sintomo ben più innocuo dovuto ad uno stato di ansia, stress o nervosismo.</descrizione_sintomo>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_fumatore -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_fumatore">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#fumatore"/>
+        <descrizione_sintomo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Il fumo di sigaretta causa diversi tipi di cancro, specialmente ai polmoni, ma è anche una delle principali cause di morte per malattie cardiache e vascolari poiché danneggia pesantemente il cuore e i vasi sanguigni impedendone il funzionamento fisiologico.</descrizione_sintomo>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_perdita_peso -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_dispnea">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#dispnea"/>
+        <descrizione_sintomo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La dispnea è un'alterazione del respiro manifestata come fame d'aria, respiro corto, affanno e può essere indicativa di una patologia polmonare o cardiaca che impedisce il corretto scambio di ossigeno nel sangue. Se improvvisa e avvertita insieme a una sensazione di panico e respiri molto frequenti e profondi invece si tratta di attacco di panico con iperventilazione.</descrizione_sintomo>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_nausea -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_nausea">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#nausea"/>
+        <descrizione_sintomo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La nausea può manifestarsi in situazioni di stress intenso o paura e può accompagnarsi a tosse secca e stizzosa e in taluni casi anche a vomito.</descrizione_sintomo>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_stress -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_stress">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#stress"/>
+        <descrizione_sintomo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lo stress psicofisico è una delle più importanti cause di malattie, in passato spesso sottovalutata. Un evento traumatico può innescare processi di ansia, panico, ipocondria o, se cronicizzato, aumentare negli anni il rischio di patologie cardiache e oncologiche.</descrizione_sintomo>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_stanchezza -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_stanchezza">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#stanchezza"/>
+        <descrizione_sintomo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La stanchezza è un sintomo fisiologico quando è conseguenza di sforzi fisici o mentali e di mancanza di sonno; se invece si manifesta una stanchezza piuttosto intensa in assenza di queste cause, essa può essere dovuta ad un'insufficienza cardiaca e dunque ad una scarsa ossigenazione del sangue.</descrizione_sintomo>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_insonnia -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#istanza_insonnia">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2022/0/untitled-ontology-7#insonnia"/>
+        <descrizione_sintomo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Con insonnia si indicano una serie di alterazioni del sonno come difficoltà ad addormentarsi o a rimanere addormentati; molto spesso è dovuta a situazioni di stress psicologico, cambiamenti della routine quotidiana, affaticamento mentale.</descrizione_sintomo>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
