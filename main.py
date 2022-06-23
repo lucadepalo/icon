@@ -29,7 +29,7 @@ df = pd.read_csv('data/heart_2020_cleaned.csv')
 #df = df.head(20000)
 
 # Questa funzione serve a selezionare N esempi dal dataset in maniera casuale
-df = dataset.sample(20000, random_state=1)
+df = df.sample(20000, random_state=1)
 
 # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html
 df.info()
