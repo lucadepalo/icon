@@ -73,7 +73,7 @@ class Questions(KnowledgeEngine):
         while c != 'si' and c != 'no':
             print("inserisci un valore corretto ")
             c = input()
-        self.declare(Fact(genetica_psico=c)))
+        self.declare(Fact(genetica_psico=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(nausea=W())), salience=15)
     def symptom_6(self):
