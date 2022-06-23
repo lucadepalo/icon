@@ -26,10 +26,7 @@ df = pd.read_csv('data/heart_2020_cleaned.csv')
 
 # Questa funzione serve a indicare quanti esempi selezionare dal dataset a partire dalla prima posizione.
 # parametri: n int, default 5. Numero di righe selezionate.
-#df = df.head(20000)
-
-# Questa funzione serve a selezionare N esempi dal dataset in maniera casuale
-df = df.sample(20000, random_state=1)
+df = df.head(20000)
 
 # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html
 df.info()
@@ -80,12 +77,11 @@ def evaluate_model(model, x_test, y_test):
     from sklearn import metrics
     # Predizione su dati test
     y_pred = model.predict(x_test)
-    # Calcolo di accuracy, precision, recall, f1-score e kappa score
+    # Calcolo di accuracy, precision, recall, f1-score
     acc = cross_val_score(model, features, target, cv=5, scoring='accuracy').mean()
     prec =cross_val_score(model, features, target, cv=5, scoring='precision').mean()
     rec = cross_val_score(model, features, target, cv=5, scoring='recall').mean()
     f1 = cross_val_score(model, features, target, cv=5, scoring='f1').mean()
-    kappa = metrics.cohen_kappa_score(y_test, y_pred)
     # Calcolo area under curve (AUC)
     y_pred_proba = model.predict_proba(x_test)[::, 1]
     fpr, tpr, _ = metrics.roc_curve(y_test, y_pred_proba)
@@ -93,7 +89,7 @@ def evaluate_model(model, x_test, y_test):
     # Stampa del grafico confusion matrix
     # cm = metrics.confusion_matrix(y_test, y_pred) vecchio
     cm = confusion_matrix(y_test, y_pred)  # nuovo
-    return {'acc': acc, 'prec': prec, 'rec': rec, 'f1': f1, 'kappa': kappa, 'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm, 'y_pred': y_pred}
+    return {'acc': acc, 'prec': prec, 'rec': rec, 'f1': f1, 'fpr': fpr, 'tpr': tpr, 'auc': auc, 'cm': cm, 'y_pred': y_pred}
 
 # Importa, imposta e usa la regressione logistica
 from sklearn.linear_model import LogisticRegression
@@ -105,7 +101,6 @@ print('Accuracy:', logreg_eval['acc'])
 print('Precision:', logreg_eval['prec'])
 print('Recall:', logreg_eval['rec'])
 print('F1 Score:', logreg_eval['f1'])
-print('Cohens Kappa Score:', logreg_eval['kappa'])
 print('Area Under Curve:', logreg_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=logreg_eval['cm'])
 disp.plot()
@@ -123,7 +118,6 @@ print('Accuracy:', gnb_eval['acc'])
 print('Precision:', gnb_eval['prec'])
 print('Recall:', gnb_eval['rec'])
 print('F1 Score:', gnb_eval['f1'])
-print('Cohens Kappa Score:', gnb_eval['kappa'])
 print('Area Under Curve:', gnb_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=gnb_eval['cm'])  # nuovo
 disp.plot()
@@ -141,7 +135,6 @@ print('Accuracy:', knn_eval['acc'])
 print('Precision:', knn_eval['prec'])
 print('Recall:', knn_eval['rec'])
 print('F1 Score:', knn_eval['f1'])
-print('Cohens Kappa Score:', knn_eval['kappa'])
 print('Area Under Curve:', knn_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=knn_eval['cm'])  # nuovo
 disp.plot()
@@ -161,7 +154,6 @@ print('Accuracy:', rfc_eval['acc'])
 print('Precision:', rfc_eval['prec'])
 print('Recall:', rfc_eval['rec'])
 print('F1 Score:', rfc_eval['f1'])
-print('Cohens Kappa Score:', rfc_eval['kappa'])
 print('Area Under Curve:', rfc_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=rfc_eval['cm'])  # nuovo
 disp.plot()
@@ -179,7 +171,6 @@ print('Accuracy:', abc_eval['acc'])
 print('Precision:', abc_eval['prec'])
 print('Recall:', abc_eval['rec'])
 print('F1 Score:', abc_eval['f1'])
-print('Cohens Kappa Score:', abc_eval['kappa'])
 print('Area Under Curve:', abc_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=abc_eval['cm'])  # nuovo
 disp.plot()
@@ -196,11 +187,11 @@ fig.set_facecolor('white')
 
 # Primo grafico
 barWidth = 0.2
-knn_score = [knn_eval['acc'], knn_eval['prec'], knn_eval['rec'], knn_eval['f1'], knn_eval['kappa']]
-logreg_score = [logreg_eval['acc'], logreg_eval['prec'], logreg_eval['rec'], logreg_eval['f1'], logreg_eval['kappa']]
-rfc_score = [rfc_eval['acc'], rfc_eval['prec'], rfc_eval['rec'], rfc_eval['f1'], rfc_eval['kappa']]
-gnb_score = [gnb_eval['acc'], gnb_eval['prec'], gnb_eval['rec'], gnb_eval['f1'], gnb_eval['kappa']]
-abc_score = [abc_eval['acc'], abc_eval['prec'], abc_eval['rec'], abc_eval['f1'], abc_eval['kappa']]
+knn_score = [knn_eval['acc'], knn_eval['prec'], knn_eval['rec'], knn_eval['f1']]
+logreg_score = [logreg_eval['acc'], logreg_eval['prec'], logreg_eval['rec'], logreg_eval['f1']]
+rfc_score = [rfc_eval['acc'], rfc_eval['prec'], rfc_eval['rec'], rfc_eval['f1']]
+gnb_score = [gnb_eval['acc'], gnb_eval['prec'], gnb_eval['rec'], gnb_eval['f1']]
+abc_score = [abc_eval['acc'], abc_eval['prec'], abc_eval['rec'], abc_eval['f1']]
 
 # Imposta la posizione della barra sulle ascisse
 r1 = np.arange(len(knn_score))
@@ -218,7 +209,7 @@ ax1.bar(r5, abc_score, width=barWidth, edgecolor='white', label='Ada Boost')
 
 # Configura assi cartesiane
 ax1.set_xlabel('Metriche', fontweight='bold')
-labels = ['Accuracy', 'Precision', 'Recall', 'F1', 'Kappa']
+labels = ['Accuracy', 'Precision', 'Recall', 'F1']
 ax1.set_xticks([r + (barWidth * 1.5) for r in range(len(knn_score))], )
 ax1.set_xticklabels(labels)
 ax1.set_ylabel('Punteggio', fontweight='bold')
