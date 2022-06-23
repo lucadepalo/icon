@@ -11,7 +11,6 @@ from sklearn import metrics
 from sklearn.metrics import plot_confusion_matrix
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.model_selection import cross_val_score
-import winsound
 from owlready2 import *
 
 # importa filtro warnings
@@ -27,7 +26,10 @@ df = pd.read_csv('data/heart_2020_cleaned.csv')
 
 # Questa funzione serve a indicare quanti esempi selezionare dal dataset a partire dalla prima posizione.
 # parametri: n int, default 5. Numero di righe selezionate.
-df = df.head(20000)
+#df = df.head(20000)
+
+# Questa funzione serve a selezionare N esempi dal dataset in maniera casuale
+df = dataset.sample(20000, random_state=1)
 
 # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html
 df.info()
@@ -108,7 +110,7 @@ print('Area Under Curve:', logreg_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=logreg_eval['cm'])
 disp.plot()
 disp.ax_.set_title('Regressione Logistica')
-winsound.Beep(1000, 250)
+print('\a')
 plt.show()
 
 # Importa, imposta e usa il naive Bayes gaussiano
@@ -126,7 +128,7 @@ print('Area Under Curve:', gnb_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=gnb_eval['cm'])  # nuovo
 disp.plot()
 disp.ax_.set_title('Naive Bayes Gaussiano')
-winsound.Beep(1000, 250)
+print('\a')
 plt.show()
 
 # Importa, imposta e usa il k nearest neighbors
@@ -144,7 +146,7 @@ print('Area Under Curve:', knn_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=knn_eval['cm'])  # nuovo
 disp.plot()
 disp.ax_.set_title(' K nearest neighbors ')
-winsound.Beep(1000, 250)
+print('\a')
 plt.show()
 
 
@@ -164,7 +166,7 @@ print('Area Under Curve:', rfc_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=rfc_eval['cm'])  # nuovo
 disp.plot()
 disp.ax_.set_title('Classificatore Random Forest')
-winsound.Beep(1000, 250)
+print('\a')
 plt.show()
 
 # Importa, imposta e usa l'Ada boost
@@ -182,7 +184,7 @@ print('Area Under Curve:', abc_eval['auc'])
 disp = ConfusionMatrixDisplay(confusion_matrix=abc_eval['cm'])  # nuovo
 disp.plot()
 disp.ax_.set_title('Classificatore AdaBoost')
-winsound.Beep(1000, 250)
+print('\a')
 plt.show()
 
 # Inizializza l'immagine con due grafici
@@ -241,14 +243,8 @@ ax2.set_ylabel('Tasso di veri positivi', fontweight='bold')
 # Crea legenda e titolo
 ax2.set_title('ROC Curve', fontsize=14, fontweight='bold')
 ax2.legend(loc=4)
-winsound.Beep(1000, 250)
+print('\a')
 plt.show()
-
-winsound.Beep(1000, 500)
-winsound.Beep(37, 500)
-winsound.Beep(1000, 500)
-winsound.Beep(37, 500)
-winsound.Beep(1000, 500)
 
 
 
