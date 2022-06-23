@@ -19,90 +19,196 @@ class Questions(KnowledgeEngine):
         print("")
         yield Fact(action="find_disease")
 
+
     #taking various input from user
     @Rule(Fact(action="find_disease"), NOT(Fact(pressione_petto=W())), salience=21)
     def symptom_0(self):
-        self.declare(Fact(pressione_petto=input("Ti capita a volte di avvertire un senso di pressione sul petto? ")))
+        print("Ti capita a volte di avvertire un senso di pressione sul petto? ")
+        c=input()
+        while c!='si' and c!='no':
+            print("inserisci un valore corretto ")
+            c=input()
+        self.declare(Fact(pressione_petto=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(sedentarieta=W())), salience=20)
     def symptom_1(self):
-        self.declare(Fact(sedentarieta=input("Hai uno stile di vita sedentario? ")))
+        print("Hai uno stile di vita sedentario? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(sedentarieta=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(fumatore=W())), salience=19)
     def symptom_2(self):
-        self.declare(Fact(fumatore=input("fumi? ")))
+        print("fumi? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(fumatore=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(dispnea=W())), salience=18)
     def symptom_3(self):
-        self.declare(Fact(dispnea=input("Ti capita di avere il fiatone dopo un'attività fisica leggera (ad es. salire le scale)? ")))
+        print("Ti capita di avere il fiatone dopo un'attività fisica leggera (ad es. salire le scale)? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(dispnea=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(genetica_cardio=W())), salience=17)
     def symptom_4(self):
-        self.declare(Fact(genetica_cardio=input("Hai casi di cardiopatie in famiglia? ")))
+        print("Hai casi di cardiopatie in famiglia? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(genetica_cardio=c)
 
     @Rule(Fact(action="find_disease"), NOT(Fact(genetica_psico=W())), salience=16)
     def symptom_5(self):
-        self.declare(Fact(genetica_psico=input("Hai casi di ansia, depressione o panico in famiglia? ")))
+        print("Hai casi di ansia, depressione o panico in famiglia? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(genetica_psico=c)))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(nausea=W())), salience=15)
     def symptom_6(self):
-        self.declare(Fact(nausea=input("Ti capita di avvertire nausea in situazioni di stress? ")))
+        print("Ti capita di avvertire nausea in situazioni di stress? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(nausea=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(stress=W())), salience=14)
     def symptom_7(self):
-        self.declare(Fact(stress=input("Hai vissuto situazioni stressanti nell'ultimo mese? ")))
+        print("Hai vissuto situazioni stressanti nell'ultimo mese? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(stress=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(stanchezza=W())), salience=13)
     def symptom_8(self):
-        self.declare(Fact(stanchezza=input("Avverti spesso stanchezza anche a riposo? ")))
+        print("Avverti spesso stanchezza anche a riposo? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(stanchezza=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(insonnia=W())), salience=12)
     def symptom_9(self):
-        self.declare(Fact(insonnia=input("Hai avuto difficoltà a dormire nell'ultimo mese? ")))
+        print("Hai avuto difficoltà a dormire nell'ultimo mese? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(insonnia=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(gonfiore=W())), salience=11)
     def symptom_10(self):
-        self.declare(Fact(gonfiore=input("Hai le gambe gonfie a volte? ")))
+        print("Hai le gambe gonfie a volte? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(gonfiore=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(palpitazioni=W())), salience=10)
     def symptom_11(self):
-        self.declare(Fact(palpitazioni=input("Ti capita di avvertire palpitazioni nel petto? ")))
+        print("Ti capita di avvertire palpitazioni nel petto? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(palpitazioni=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(sovrappeso=W())), salience=9)
     def symptom_12(self):
-        self.declare(Fact(sovrappeso=input("Sei sovrappeso? ")))
+        print("Sei sovrappeso? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(sovrappeso=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(diabete=W())), salience=8)
     def symptom_13(self):
-        self.declare(Fact(diabete=input("Soffri di diabete? ")))
+        print("Soffri di diabete? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(diabete=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(dieta=W())), salience=7)
     def symptom_14(self):
-        self.declare(Fact(dieta=input("Hai una dieta poco equilibrata (molti grassi, molti zuccheri, molte carni rosse, pochi vegetali)? ")))
+        print("Hai una dieta poco equilibrata (molti grassi, molti zuccheri, molte carni rosse, pochi vegetali)? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(dieta=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(sudore=W())), salience=6)
     def symptom_15(self):
-        self.declare(Fact(sudore=input("Soffri di vampate di calore e/o sudorazione fredda? ")))
+        print("Soffri di vampate di calore e/o sudorazione fredda? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(sudore=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(angina=W())), salience=5)
     def symptom_16(self):
-        self.declare(Fact(angina=input("Avverti a volte dolore alla schiena, al braccio sinistro o che si irraggia sotto il mento? ")))
+        print("Avverti a volte dolore alla schiena, al braccio sinistro o che si irraggia sotto il mento? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(angina=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(ruminazione=W())), salience=4)
     def symptom_17(self):
-        self.declare(Fact(ruminazione=input("Trovi che sia difficile concentrarti su un'attività a causa dei tuoi pensieri? ")))
+        print("Trovi che sia difficile concentrarti su un'attività a causa dei tuoi pensieri? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(ruminazione=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(tremori=W())), salience=3)
     def symptom_18(self):
-        self.declare(Fact(tremori=input("Ti capita di avere tremori e formicolii? ")))
+        print("Ti capita di avere tremori e formicolii? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(tremori=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(negativita=W())), salience=2)
     def symptom_19(self):
-        self.declare(Fact(negativita=input("Tendi a vedere il lato negativo delle cose? ")))
+        print("Tendi a vedere il lato negativo delle cose? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(negativita=c))
 
     @Rule(Fact(action="find_disease"), NOT(Fact(ipocondria=W())), salience=1)
     def symptom_20(self):
-        self.declare(Fact(ipocondria=input("In genere ritieni di essere particolarmente preoccupata/o e impressionabile riguardo alla salute? ")))
+        print("In genere ritieni di essere particolarmente preoccupata/o e impressionabile riguardo alla salute? ")
+        c = input()
+        while c != 'si' and c != 'no':
+            print("inserisci un valore corretto ")
+            c = input()
+        self.declare(Fact(ipocondria=c))
 
     #different rules checking for each disease match
     @Rule(

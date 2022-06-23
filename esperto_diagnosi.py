@@ -93,7 +93,7 @@ if __name__ == "__main__":
         if input() == "no":
             print("Vuoi visualizzare ulteriori informazioni sui sintomi presenti nelle domande appena lette?\n Rispondi con si o no")
             if input() == "si":
-                                                                                                                                                                                                                                                                 main_ontology()
+                main_ontology()
             else:
                 exit()
 
